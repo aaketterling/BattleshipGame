@@ -5,6 +5,8 @@ public class Submarine extends Ship {
 	// static variable
 
 	static final int LENGTH = 1;
+	static final String TYPE = "submarine";
+
 
 	public Submarine() {
 		super(Submarine.LENGTH);
@@ -12,8 +14,7 @@ public class Submarine extends Ship {
 
 	@Override
 	public String getShipType() {
-		// TODO Auto-generated method stub
-		return null;
+		return Submarine.TYPE;
 	}
 
 }

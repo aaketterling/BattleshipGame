@@ -5,6 +5,8 @@ public class EmptySea extends Ship {
 	// static variables
 
 	static final int LENGTH = 1;
+	static final String TYPE = "empty";
+
 
 	public EmptySea() {
 		super(EmptySea.LENGTH);
@@ -27,7 +29,7 @@ public class EmptySea extends Ship {
 	
 	@Override
 	public String getShipType() {
-		return "";
+		return EmptySea.TYPE;
 	}
 
 }
