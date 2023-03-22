@@ -11,12 +11,6 @@ public class EmptySea extends Ship {
 	}
 
 	@Override
-	public String getShipType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	boolean shootAt(int row, int column) {
 		return false;
 	}
