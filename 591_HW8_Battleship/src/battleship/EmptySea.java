@@ -1,10 +1,13 @@
 package battleship;
 
 public class EmptySea extends Ship {
+	
+	// static variables
 
-	public EmptySea(int length) {
-		super(length);
-		// TODO Auto-generated constructor stub
+	static final int LENGTH = 1;
+
+	public EmptySea() {
+		super(EmptySea.LENGTH);
 	}
 
 	@Override

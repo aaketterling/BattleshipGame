@@ -2,9 +2,12 @@ package battleship;
 
 public class Cruiser extends Ship {
 
-	public Cruiser(int length) {
-		super(length);
-		// TODO Auto-generated constructor stub
+	// static variables
+
+	static final int LENGTH = 3;
+
+	public Cruiser() {
+		super(Cruiser.LENGTH);
 	}
 
 	@Override
