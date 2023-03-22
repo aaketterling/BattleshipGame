@@ -21,6 +21,8 @@ public abstract class Ship {
 	// constructor
 	public Ship(int length) {
 		this.length = length;
+		// initialize hit array based on length
+		this.hit = new boolean[length];
 	}
 
 	// getters
