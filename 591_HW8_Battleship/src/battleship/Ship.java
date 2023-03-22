@@ -2,22 +2,24 @@ package battleship;
 
 public abstract class Ship {
 	// instance variables
-	
+
 	// The row that contains the bow (front part of the ship)
 	private int bowRow;
-	
+
 	// The column that contains the bow (front part of the ship)
 	private int bowColumn;
-	
+
 	// The length of the ship
 	private int length;
-	
-	// A boolean that represents whether the ship is going to be placed horizontally or vertically
+
+	// A boolean that represents whether the ship is going to be placed horizontally
+	// or vertically
 	private boolean horizontal;
-	
-	// An array of booleans that indicate whether that part of the ship has been hit or not
+
+	// An array of booleans that indicate whether that part of the ship has been hit
+	// or not
 	private boolean[] hit;
-	
+
 	// constructor
 	public Ship(int length) {
 		this.length = length;
@@ -41,11 +43,11 @@ public abstract class Ship {
 	public int getLength() {
 		return length;
 	}
-	
+
 	public boolean[] getHit() {
 		return hit;
 	}
-	
+
 	// setters
 	public void setBowRow(int bowRow) {
 		this.bowRow = bowRow;
@@ -58,34 +60,46 @@ public abstract class Ship {
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
-	
+
 	// abstract method
-	
-	// Returns the type of ship as a String. 
+
+	// Returns the type of ship as a String.
 	public abstract String getShipType();
-	
+
 	// other methods
-	
+
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 		return false;
 	}
-	
-	void placeShipAt(int row, int column, boolean horizontal,Ocean ocean) {
-		
+
+	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+
 	}
-	
+
 	boolean shootAt(int row, int column) {
 		return false;
 	}
-	
+
 	boolean isSunk() {
-		return false;
+		// Return true if every part of the ship has been hit, false otherwise
+		// using getter method because it is available.
+		// TA in OhO said can use direct, e.g. this.hit but if getter available, then
+		// should to use it. either is correct, preference, but be consistent.
+		for (int i = 0; i < this.getHit().length; i++) {
+			// if any of part of the ship is NOT hit, i.e. true, then return false early
+			if (!this.getHit()[i]) {
+				return false;
+			}
+		}
+
+		// if the for loop above did not return early, false, then it must be sunk all
+		// parts are true, hit.
+		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "";
 	}
 
-	
 }
