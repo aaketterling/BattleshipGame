@@ -69,14 +69,16 @@ public abstract class Ship {
 	// other methods
 
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+		// TODO
 		return false;
 	}
 
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-
+		// TODO
 	}
 
 	boolean shootAt(int row, int column) {
+		// TODO
 		return false;
 	}
 
