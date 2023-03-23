@@ -99,7 +99,8 @@ public abstract class Ship {
 
 	@Override
 	public String toString() {
-		return "";
+		// return ”s” if the ship has been sunk and ”x” if it has not been sunk
+		return this.isSunk() ? "s" : "x";
 	}
 
 }
