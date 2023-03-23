@@ -56,8 +56,7 @@ public class Ocean {
 	}
 	
 	boolean isGameOver() {
-		// TODO
-		return false;
+		return this.getShipsSunk() == 10 ? true : false;
 	}
 	
 	Ship[][] getShipArray() {
