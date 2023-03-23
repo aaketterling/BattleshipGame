@@ -58,9 +58,12 @@ public class Ocean {
 
 		/*
 		 * Proposed pseudo code check ships array at [row][column] if equals "empty
-		 * return true, else false e.g. return
-		 * this.getShipArray()[row][column].getShipType().equals("empty") ? false :
-		 * true; Adam, are you ok with ternary and one-liners? Easy to read?
+		 * return false, else true e.g. 
+		 * 
+		 * if empty, then not occupied.  it must be another ship.
+		 * return this.getShipArray()[row][column].getShipType().equals("empty") ? false : true; 
+		 * 
+		 * Adam, are you ok with ternary and one-liners? Easy to read?
 		 */
 		return false;
 	}
