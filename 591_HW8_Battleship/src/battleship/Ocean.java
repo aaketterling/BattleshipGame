@@ -20,16 +20,17 @@ public class Ocean {
 	
 	public Ocean() {
 		// TODO
-	}
-	
-	
-	void placeAllShipsRandomly() {
-		// TODO
 		// helper method for empty ocean, update this.ships with all EmptySea ships
 		
         this.shotsFired = 0;
         this.hitCount = 0;
         this.shipsSunk = 0;
+	}
+	
+	
+	void placeAllShipsRandomly() {
+		// TODO
+	
 	}
 	
 	boolean isOccupied(int row, int column) {
