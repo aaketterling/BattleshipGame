@@ -70,11 +70,35 @@ public abstract class Ship {
 
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 		// TODO
+		/*
+		 *	logic depends if horizontal
+		 *	check if ship is within the 10x10 array
+		 *	TODO with Adam
+		 *
+		 *	check surroundings, surrounding cell should not be occupied.  occupied return false
+		 *		can be out of bounds, means on the edge.  logic above says ship fits on board
+		 *	for horizontal, need to check row above and below, and column bow +1, end -1
+		 *	e.g bow 5,5 battleship (length 4) would check row from for 4 to 6,  columns, 6 to 1 
+		 *	for not horizontal, need to check column left and right of column, and row bow +1 end  -1
+		 *	e.g bow 5,5 cruiser (length 3), would check column 4 to 6, and row 6 to 2
+		 *
+		 *	return true if never return false early
+		 */
 		return false;
 	}
 
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 		// TODO
+		/*
+		 * assume okToPlaceShipAt is true, will not do checks
+		 * setBowRow, setBowColumn, setHorizontal
+		 * 	get ocean ship array and start at [row][column] and equal it to this ship
+		 * 	this is the bow
+		 * if horizontal,
+		 * 	move right to left length - 1 more times, 
+		 * 	e.g. set i = length - 1, [row][column - i--] until < 0
+		 * if not horizontal, move up length - 1 times, j = length - 1, [j--][column]
+		 */
 	}
 
 	boolean shootAt(int row, int column) {
