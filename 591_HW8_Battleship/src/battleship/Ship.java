@@ -96,7 +96,7 @@ public abstract class Ship {
 		 * 	this is the bow
 		 * if horizontal,
 		 * 	move right to left length - 1 more times, 
-		 * 	e.g. set i = length - 1, [row][column - i--] until < 0
+		 * 	e.g. set i = length - 1, [row][column - i--] until > 0
 		 * if not horizontal, move up length - 1 times, j = length - 1, [j--][column]
 		 */
 	}
