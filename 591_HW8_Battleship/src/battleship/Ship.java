@@ -98,6 +98,8 @@ public abstract class Ship {
 		 * 	move right to left length - 1 more times, 
 		 * 	e.g. set i = 1, [row][column - i--] until i < length
 		 * if not horizontal, move up length - 1 times, j = 1 until j < length - 1, [row - j--][column]
+		 * 
+		 * maybe just place entire ship in loop, start i or j to 0, minus 0 is itself so it will set the bow
 		 */
 	}
 
