@@ -121,7 +121,7 @@ public abstract class Ship {
 		 * 
 		 * shipType is "empty" not "EmptyShip" but can use ocean.isOccupied() same thing, line 177
 		 * 
-		 * surrounding cells can be out of grid, e.g. horizontal battleship row, column = 0, 3
+		 * surrounding cells can be out of grid, e.g. horizontal battleship row, column = 0, 3 (this is covered, my bad)
 		 * 
 		 * some smoe tests on a empty board
 		 * all horizontal battleship
