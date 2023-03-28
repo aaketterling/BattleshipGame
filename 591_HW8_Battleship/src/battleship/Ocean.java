@@ -92,7 +92,9 @@ public class Ocean {
 		 * 
 		 * Adam, are you ok with ternary and one-liners? Easy to read?
 		 */
-		return false;
+//		return false;
+		return this.getShipArray()[row][column].getShipType().equals("empty") ? false : true; 
+
 	}
 
 	boolean shootAt(int row, int column) {
