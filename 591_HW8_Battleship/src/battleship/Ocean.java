@@ -1,5 +1,10 @@
 package battleship;
 
+/**
+ * Contains a 10x10 array of Ships, representing an "ocean", and some methods to manipulate it. 
+ * @author adamkett
+ *
+ */
 public class Ocean {
 	// instance variables
 
@@ -45,6 +50,13 @@ public class Ocean {
 	 * available.  I kind of think use directly.  Discuss and agree what to do.
 	 * 
 	 */
+	
+	// methods 
+	
+	// this will be used within 
+	public int getDimension() {
+	    return 10;
+	}
 	
 	private void createEmptyOcean() {
 		for (int i = 0; i < 10; i++) {

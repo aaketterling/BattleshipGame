@@ -1,6 +1,30 @@
 package battleship;
 
+/**
+ *  Ship describes the Characteristics common to all ships
+ * @author adamkett
+ *
+ */
 public abstract class Ship {
+	
+	/*make subclasses: 
+	 	▪ class Battleship extends Ship
+			● Describes a ship of length 4
+	 	▪ class Cruiser extends Ship
+			● Describes a ship of length 3
+		▪ class Destroyer extends Ship
+			● Describes a ship of length 2
+		▪ class Submarine extends Ship
+			● Describes a ship of length 1
+		▪ class EmptySea extends Ship
+			● Describes a part of the ocean that doesn’t have a ship in it. (It
+			seems silly to have the lack of a ship be a type of ship, but this is a
+			trick that simplifies a lot of things. This way, every location in the
+			ocean contains a “ship” of some kind.)
+	 */
+	
+	
+	
 	// instance variables
 
 	// The row that contains the bow (front part of the ship)
@@ -20,7 +44,9 @@ public abstract class Ship {
 	// or not
 	private boolean[] hit;
 
+	
 	// constructor
+	
 	public Ship(int length) {
 		this.length = length;
 		// initialize hit array based on length
@@ -49,6 +75,7 @@ public abstract class Ship {
 	}
 
 	// setters
+	
 	public void setBowRow(int bowRow) {
 		this.bowRow = bowRow;
 	}
@@ -69,11 +96,10 @@ public abstract class Ship {
 	// other methods
 
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-		// TODO
+	
 		/*
 		 *	logic depends if horizontal
 		 *	check if ship is within the 10x10 array
-		 *	TODO with Adam
 		 *
 		 *	check surroundings, surrounding cell should not be occupied.  occupied return false
 		 *		can be out of bounds, means on the edge.  logic above says ship fits on board
@@ -84,7 +110,56 @@ public abstract class Ship {
 		 *
 		 *	return true if never return false early
 		 */
-		return false;
+		
+		// Is ship within the 10x10 ocean array? 
+		if (horizontal) {
+			//since the column index already includes the bow we need to subtract 1 to get the remaining length that extends from the bow. 
+			if (column - (length -1) < 0) {
+				// return false if out of bounds
+				return false;
+			}
+		} else {
+			if (row - (length -1) < 0 ) {
+				return false;
+			}
+		}
+		
+		// Check surrounding of the ship to ensure no other ship is present (V, H, D) 
+		// v & h loops through the cells surrounding the ship ( v = row offset h = column offset ranging from 1 to -1
+		for (int v = -1; v <= 1; v++) {
+			for (int h = -1; h <= 1; h++ ) {
+				// d loops through the length of the ship (ranging from 0 to -1 length)
+				// based on orientation of the ship ( h or v) and check each part of the ship along with its surroundings. 
+				for (int d = 0; d < length; d++) {
+					
+					// if horizontal then this else that. 
+					
+					int newRow;
+					if (horizontal) {
+					    newRow = row + v;
+					} else {
+					    newRow = row + h - d;
+					}
+					
+					int newColumn;
+					if (horizontal) {
+						newColumn = column + h - d;
+					} else {
+						newColumn = column + h - d;
+					}
+					
+					// are the indices within the bounds of the ocean???
+					if (newRow >= 0 && newRow < ocean.getDimension() && newColumn >= 0 && newColumn < ocean.getDimension()) {
+						// Check if there is a ship in the surrounding cells
+	                    if (!ocean.getShipArray()[newRow][newColumn].getShipType().equals("EmptySea")) {
+	                        return false;
+	                    }
+	                }
+	            }
+	        }
+	    }
+		return true;
+	
 	}
 
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
