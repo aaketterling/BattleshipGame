@@ -22,7 +22,7 @@ public class Ocean {
 	public Ocean() {
 		// TODO
 		// helper method for empty ocean, update this.ships with all EmptySea ships
-
+		this.createEmptyOcean();
 		this.shotsFired = 0;
 		this.hitCount = 0;
 		this.shipsSunk = 0;
@@ -45,6 +45,21 @@ public class Ocean {
 	 * available.  I kind of think use directly.  Discuss and agree what to do.
 	 * 
 	 */
+	
+	private void createEmptyOcean() {
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				// EmptySea is a type of ship
+				Ship emptySea = new EmptySea();
+				emptySea.setBowRow(i);
+				emptySea.setBowColumn(j);
+				emptySea.setHorizontal(true);
+				this.ships[i][j] = emptySea;
+				//or
+//				this.getShipArray()[i][j] = emptySea;
+			}
+		}
+	}
 
 	void placeAllShipsRandomly() {
 		// TODO
@@ -102,5 +117,41 @@ public class Ocean {
 	// for debugging only
 	void printWithShips() {
 		// TODO
+		
+		// for debugging only
+		// 10 x 10 grid
+		// print top row headers
+		System.out.print(" "); // space for top left corner
+		// column numbers with space between
+		for (int i = 0; i < 10; i++) {
+			System.out.print(" " + i);
+		}
+		
+		// go to next line
+		System.out.println();
+		
+		// print each row label
+		for (int j = 0; j < 10; j++) {
+			System.out.print(j);
+			// for each row, print each ship at each row x column "cell" like in a spreadsheet
+			for (int k = 0; k < 10; k++) {
+				// get ship at cell
+				Ship shipAtCell = this.getShipArray()[j][k];
+				// print based on ship type
+				if (shipAtCell.getShipType().equals("battleship")) {
+					System.out.print(" " + "b");
+				} else if (shipAtCell.getShipType().equals("cruiser")){
+					System.out.print(" " + "c");
+				} else if (shipAtCell.getShipType().equals("destroyer")){
+					System.out.print(" " + "d");
+				} else if (shipAtCell.getShipType().equals("submarine")){
+					System.out.print(" " + "s");
+				} else if (shipAtCell.getShipType().equals("empty")){
+					System.out.print(" " + " ");
+				} 
+			}
+			// go to next line
+			System.out.println();
+		}
 	}
 }
