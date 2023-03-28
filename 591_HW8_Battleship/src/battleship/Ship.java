@@ -111,6 +111,29 @@ public abstract class Ship {
 		 *	return true if never return false early
 		 */
 		
+		/*
+		 * note from armand
+		 * we should check if ship will even fit on board and return early if not
+		 * don't do any for loops.  
+		 * e.g. battle ship will not fit horizontally row, column 0, 2 but ok for 0, 3
+		 * can we avoid a for loop, in a for loop, in a for loop.  
+		 * if branches in newColumn is the same, line 169 and 171
+		 * 
+		 * shipType is "empty" not "EmptyShip" but can use ocean.isOccupied() same thing, line 177
+		 * 
+		 * surrounding cells can be out of grid, e.g. horizontal battleship row, column = 0, 3
+		 * 
+		 * some smoe tests on a empty board
+		 * all horizontal battleship
+		 * 5,5 return true
+		 * 0, 3 return true
+		 * 9, 2 return false
+		 * -1, 9 return false
+		 * 0, 10 return false
+		 * 
+		 * Adam, walk through logic 
+		 */
+		
 		// Is ship within the 10x10 ocean array? 
 		if (horizontal) {
 			//since the column index already includes the bow we need to subtract 1 to get the remaining length that extends from the bow. 
