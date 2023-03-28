@@ -113,7 +113,7 @@ public abstract class Ship {
 		
 		/*
 		 * note from armand
-		 * we should check if ship will even fit on board and return early if not
+		 * we should check if ship will even fit on board and return early if not (is row and column between 0-9 inclusively
 		 * don't do any for loops.  
 		 * e.g. battle ship will not fit horizontally row, column 0, 2 but ok for 0, 3
 		 * can we avoid a for loop, in a for loop, in a for loop.  
