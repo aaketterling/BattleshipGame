@@ -99,8 +99,25 @@ public abstract class Ship {
 		 * 	e.g. set i = 1, [row][column - i--] until i < length
 		 * if not horizontal, move up length - 1 times, j = 1 until j < length - 1, [row - j--][column]
 		 * 
-		 * maybe just place entire ship in loop, start i or j to 0, minus 0 is itself so it will set the bow
+		 * *** did this way *** maybe just place entire ship in loop, start i or j to 0, minus 0 is itself so it will set the bow
 		 */
+		
+		this.setBowRow(row);
+		this.setBowColumn(column);
+		this.setHorizontal(horizontal);
+		// the incremental variable starts at 0, so first time it is ran, it subtracts 0 from row or column
+		// so that sets the bow
+        if (horizontal) {
+        	// row is constant, the column gets decremented
+            for (int i = 0; i < this.getLength(); i++) {
+                ocean.getShipArray()[row][column - i] = this;
+            }
+        } else {
+        	// the column is constant, the row gets decremented
+            for (int j = 0; j < this.getLength(); j++) {
+                ocean.getShipArray()[row - j][column] = this;
+            }
+        }
 	}
 
 	boolean shootAt(int row, int column) {
