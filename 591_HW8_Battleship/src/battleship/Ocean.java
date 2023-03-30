@@ -90,7 +90,6 @@ public class Ocean {
 		 * if empty, then not occupied.  it must be another ship.
 		 * return this.getShipArray()[row][column].getShipType().equals("empty") ? false : true; 
 		 * 
-		 * Adam, are you ok with ternary and one-liners? Easy to read?
 		 */
 //		return false;
 		return this.getShipArray()[row][column].getShipType().equals("empty") ? false : true; 

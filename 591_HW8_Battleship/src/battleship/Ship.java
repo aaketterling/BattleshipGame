@@ -26,6 +26,8 @@ public abstract class Ship {
 	
 	
 	// instance variables
+	
+	
 
 	// The row that contains the bow (front part of the ship)
 	private int bowRow;
@@ -46,6 +48,10 @@ public abstract class Ship {
 
 	
 	// constructor
+	
+	private boolean isEmpty(Ship ship) {
+		  return "empty".equals(ship.getShipType());
+		 }
 	
 	public Ship(int length) {
 		this.length = length;
@@ -96,6 +102,7 @@ public abstract class Ship {
 	// other methods
 
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+		Ship[][] shipArray = ocean.getShipArray();
 	
 		/*
 		 *	logic depends if horizontal
@@ -112,77 +119,58 @@ public abstract class Ship {
 		 */
 		
 		/*
-		 * note from armand
-		 * we should check if ship will even fit on board and return early if not (is row and column between 0-9 inclusively
-		 * don't do any for loops.  
-		 * e.g. battle ship will not fit horizontally row, column 0, 2 but ok for 0, 3
-		 * can we avoid a for loop, in a for loop, in a for loop.  
-		 * if branches in newColumn is the same, line 169 and 171
+		Check if the ship's position is within the grid bounds. If not, return false.
+		
+		Check if the ship overlaps or touches another ship (vertically, horizontally, or diagonally). If it does, return false.
+		
+		If the ship's position is within bounds and doesn't overlap or touch another ship, return true.
+		
+		
 		 * 
-		 * shipType is "empty" not "EmptyShip" but can use ocean.isOccupied() same thing, line 177
-		 * 
-		 * surrounding cells can be out of grid, e.g. horizontal battleship row, column = 0, 3 (this is covered, my bad)
-		 * 
-		 * some smoe tests on a empty board
-		 * all horizontal battleship
-		 * 5,5 return true
-		 * 0, 3 return true
-		 * 9, 2 return false
-		 * -1, 9 return false
-		 * 0, 10 return false
-		 * 
-		 * Adam, walk through logic 
 		 */
 		
-		// Is ship within the 10x10 ocean array? 
+		// Is ship within the 0-9 ocean array? 
 		if (horizontal) {
-			//since the column index already includes the bow we need to subtract 1 to get the remaining length that extends from the bow. 
-			if (column - (length -1) < 0) {
-				// return false if out of bounds
-				return false;
-			}
+		    if (column - this.getLength()  < -1 || column > 9 ) {
+		        // return false if out of bounds
+		        return false;
+		    }
 		} else {
-			if (row - (length -1) < 0 ) {
-				return false;
-			}
+		    if (row - this.getLength() < -1 || row > 9 ) {
+		        return false; 
+		    }
 		}
-		
-		// Check surrounding of the ship to ensure no other ship is present (V, H, D) 
-		// v & h loops through the cells surrounding the ship ( v = row offset h = column offset ranging from 1 to -1
-		for (int v = -1; v <= 1; v++) {
-			for (int h = -1; h <= 1; h++ ) {
-				// d loops through the length of the ship (ranging from 0 to -1 length)
-				// based on orientation of the ship ( h or v) and check each part of the ship along with its surroundings. 
-				for (int d = 0; d < length; d++) {
-					
-					// if horizontal then this else that. 
-					
-					int newRow;
-					if (horizontal) {
-					    newRow = row + v;
-					} else {
-					    newRow = row + h - d;
-					}
-					
-					int newColumn;
-					if (horizontal) {
-						newColumn = column + h - d;
-					} else {
-						newColumn = column + h - d;
-					}
-					
-					// are the indices within the bounds of the ocean???
-					if (newRow >= 0 && newRow < ocean.getDimension() && newColumn >= 0 && newColumn < ocean.getDimension()) {
-						// Check if there is a ship in the surrounding cells
-	                    if (!ocean.getShipArray()[newRow][newColumn].getShipType().equals("EmptySea")) {
+		// i & j represent horizontal and vertical offsets, ranging from -1 to 1
+	    if (horizontal) {
+	    	//column prior to row to cover edges of negative space
+	    	for (int j = column - this.getLength(); j <= column + 1; j++) {
+	    		for (int i = row - 1; i <= row + 1; i++) {
+	                // Check if the current position is within the ocean bounds
+	    			if (i >= 0 && i < 10 && j >= 0 && j < 10) {
+	                    // If there is already a ship at this position, return false
+	                    if (!this.isEmpty(shipArray[i][j])) {
+	                        return false;
+	                    }
+	                }
+	            }
+	        }
+	    } else {
+	    	//Rows prior to columns to cover edges of negative space
+	        for (int i = row - this.getLength(); i <= row + 1; i++) {
+	            for (int j = column - 1; j <= column + 1; j++) {
+	                // Check if the current position is within the ocean bounds
+	    			if (i >= 0 && i < 10 && j >= 0 && j < 10) {
+	                    // If there is already a ship at this position, return false
+	                    if (!this.isEmpty(shipArray[i][j])) {
 	                        return false;
 	                    }
 	                }
 	            }
 	        }
 	    }
-		return true;
-	
+
+	    // If the code reaches this point, it means the ship can be placed at the given position
+	    return true;
 	}
 
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
@@ -219,8 +207,28 @@ public abstract class Ship {
 	}
 
 	boolean shootAt(int row, int column) {
-		// TODO
-		return false;
+	    // If the ship has been sunk, return false
+	    if (isSunk()) {
+	        return false;
+	    }
+
+	    // Does the ship occupy the given location (row, column)
+	    if (horizontal) {
+	        if (row == bowRow && column <= bowColumn && column > bowColumn - length) {
+	            // Calculate the index of the hit section and update the hit array
+	            int hitIndex = bowColumn - column;
+	            hit[hitIndex] = true;
+	            return true;
+	        }
+	    } else {
+	        if (column == bowColumn && row <= bowRow && row > bowRow - length) {
+	            // Calculate the index of the hit section and update the hit array
+	            int hitIndex = bowRow - row;
+	            hit[hitIndex] = true;
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 
 	boolean isSunk() {
