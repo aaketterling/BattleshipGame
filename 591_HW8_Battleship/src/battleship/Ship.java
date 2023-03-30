@@ -131,12 +131,12 @@ public abstract class Ship {
 		
 		// Is ship within the 0-9 ocean array? 
 		if (horizontal) {
-		    if (column - this.getLength()  < -1 || column > 9 ) {
+		    if (column - this.getLength()  < -1 || column > 9 || row < 0 || row > 9 ) { // subs might be placed to close to edge and go out. Same with boats smaller than battle ship. 
 		        // return false if out of bounds
 		        return false;
 		    }
 		} else {
-		    if (row - this.getLength() < -1 || row > 9 ) {
+		    if (row - this.getLength() < -1 || row > 9 || column < 0 || column > 9 ) {
 		        return false; 
 		    }
 		}
