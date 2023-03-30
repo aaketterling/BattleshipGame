@@ -49,7 +49,7 @@ public class Adam {
         System.out.println("Sub at (-1,3) out of bouds:                       -> false = " + submarine.okToPlaceShipAt(-1, 3, true, battleShipOcean));
         System.out.println("Sub at (10,0) out of bouds:                       -> false = " + submarine.okToPlaceShipAt(10, 0, true, battleShipOcean));
         System.out.println("Sub at (0,10) out of bouds:                       -> false = " + submarine.okToPlaceShipAt(0, 10, true, battleShipOcean));
-        System.out.println("Sub at (1,1) in bouds:                            -> true = " + submarine.okToPlaceShipAt(1, 1, true, battleShipOcean));
+        System.out.println("Sub at (0,0) in bouds:                            -> true = " + submarine.okToPlaceShipAt(1, 1, true, battleShipOcean));
         System.out.println(" ");
         
 		// Test cases for subs vertical
@@ -57,7 +57,7 @@ public class Adam {
         System.out.println("Sub at (-1,3) out of bouds:                       -> false = " + submarine.okToPlaceShipAt(-1, 3, false, battleShipOcean));
         System.out.println("Sub at (10,0) out of bouds:                       -> false = " + submarine.okToPlaceShipAt(10, 0, false, battleShipOcean));
         System.out.println("Sub at (0,10) out of bouds:                       -> false = " + submarine.okToPlaceShipAt(0, 10, false, battleShipOcean));
-        System.out.println("Sub at (1,1) in bouds:                            -> true = " + submarine.okToPlaceShipAt(1, 1, false, battleShipOcean));
+        System.out.println("Sub at (0,0) in bouds:                            -> true = " + submarine.okToPlaceShipAt(1, 1, false, battleShipOcean));
 
         System.out.println("----------------------------------------------------------------------------------------");
         
