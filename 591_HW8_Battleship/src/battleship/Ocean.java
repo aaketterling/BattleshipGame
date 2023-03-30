@@ -66,9 +66,7 @@ public class Ocean {
 				emptySea.setBowRow(i);
 				emptySea.setBowColumn(j);
 				emptySea.setHorizontal(true);
-				this.ships[i][j] = emptySea;
-				//or
-//				this.getShipArray()[i][j] = emptySea;
+				this.getShipArray()[i][j] = emptySea;
 			}
 		}
 	}
