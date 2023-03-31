@@ -11,8 +11,56 @@ public class Armand {
 		Ocean battleShipOcean = new Ocean();
 		Ship battleShip = new Battleship();
 		Ship cruiserShip = new Cruiser();
-		battleShip.placeShipAt(5, 5, true, battleShipOcean);
-		cruiserShip.placeShipAt(2, 0, false, battleShipOcean);
+		
+		if (battleShip.okToPlaceShipAt(5, 5, true, battleShipOcean)) {
+			battleShip.placeShipAt(5, 5, true, battleShipOcean);
+		}
+		
+		if (cruiserShip.okToPlaceShipAt(2, 0, false, battleShipOcean)) {
+			cruiserShip.placeShipAt(2, 0, false, battleShipOcean);
+		}
+		
+		Ship battleShip2 = new Battleship();
+		
+		if (battleShip2.okToPlaceShipAt(4, 5, true, battleShipOcean)) {
+			System.out.println("[issue] battleShip2 4,5 should be false");
+		} else {
+			System.out.println("battleShip2 4,5 is false as expected");
+		}
+		
+		if (battleShip2.okToPlaceShipAt(9, 2, true, battleShipOcean)) {
+			System.out.println("[issue] battleShip2 9,2 should be false too long for board");
+		} else {
+			System.out.println("battleShip2 9,2 is false as expected");
+		}
+		
+		if (battleShip2.okToPlaceShipAt(-1, 9, true, battleShipOcean)) {
+			System.out.println("[issue] battleShip2 -1, 9 should be false illegal coordinates");
+		} else {
+			System.out.println("battleShip2 -1, 9 is false as expected");
+		}
+		
+		if (battleShip2.okToPlaceShipAt(9, 10, true, battleShipOcean)) {
+			System.out.println("[issue] battleShip2 9, 10 should be false illegal coordinates");
+		} else {
+			System.out.println("battleShip2 9, 10 is false as expected");
+		}
+		
+		if (battleShip2.okToPlaceShipAt(-1, 10, true, battleShipOcean)) {
+			System.out.println("[issue] battleShip2 -1, 10 should be false illegal coordinates");
+		} else {
+			System.out.println("battleShip2 -1, 10 is false as expected");
+		}
+		
+		if (battleShip2.okToPlaceShipAt(9, 3, true, battleShipOcean)) {
+			System.out.println("battleShip2 9, 3 should be true");
+			battleShip2.placeShipAt(9, 3, true, battleShipOcean);
+		} else {
+			System.out.println("[issue] battleShip2 9,3 is false and NOT expected fits in board");
+		}
+		
+
+		System.out.println(); // spacing
 		
 		battleShipOcean.printWithShips();
 		
