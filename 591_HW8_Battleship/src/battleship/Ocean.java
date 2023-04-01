@@ -62,6 +62,21 @@ public class Ocean {
 	    return 10;
 	}
 	
+	// helper methods for placeAllShipsRandomly
+	
+	/**
+	 * Helper method to emulate Python randInt with min and max
+	 * @param min	minimum integer to select randomly (inclusive)
+	 * @param max	maximum integer to select randomly (exclusive)
+	 * @return integer randomly selected with range min to (max - 1)
+	 */
+	private int randInt(int min, int max) {
+        Random random = new Random();
+        
+        return random.nextInt(max - min) + min;
+
+	}
+	
 	private void createEmptyOcean() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -97,17 +112,17 @@ public class Ocean {
             isHorizontal = random.nextBoolean();
             if (isHorizontal) {
             	// can be any row 0-9, 
-                row = random.nextInt(10);
+                row = this.randInt(0, 10);
                 // column min is ship length - 1
                 // e.g. battleship length 4, column can only be 3
                 // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
-                column = random.nextInt(10 - battleship.getLength() - 1) + battleship.getLength() - 1;
+                column = this.randInt(battleship.getLength() - 1, 10);
             } else {
             	// row min must be ship length - 1
             	// e.g. battleship length r, row can only be 3
-                row = random.nextInt(10 - battleship.getLength() - 1) + battleship.getLength() - 1;
+                row = randInt(battleship.getLength() - 1, 10);
                 // column can be 0-9
-                column = random.nextInt(10);
+                column = this.randInt(0,10);
             }
 
             boolean okToPlaceBattleship = battleship.okToPlaceShipAt(row, column, isHorizontal, this);
@@ -117,11 +132,11 @@ public class Ocean {
             	// same logic.  try to make helper
                 isHorizontal = random.nextBoolean();
                 if (isHorizontal) {
-                    row = random.nextInt(10);
-                    column = random.nextInt(10 - battleship.getLength() - 1) + battleship.getLength() - 1;
+                    row = this.randInt(0, 10);
+                    column = this.randInt(battleship.getLength() - 1, 10);
                 } else {
-                    row = random.nextInt(10 - battleship.getLength() - 1) + battleship.getLength() - 1;
-                    column = random.nextInt(10);
+                    row = this.randInt(battleship.getLength() - 1, 10);
+                    column = this.randInt(0, 10);
                 }
                 
                 okToPlaceBattleship = battleship.okToPlaceShipAt(row, column, isHorizontal, this);
