@@ -62,7 +62,7 @@ public class Ocean {
 	    return 10;
 	}
 	
-	// helper methods for placeAllShipsRandomly
+	// helper methods
 	
 	/**
 	 * Helper method to emulate Python randInt with min and max
@@ -77,6 +77,14 @@ public class Ocean {
 
 	}
 	
+	
+	/**
+	 * Adds a certain type of ship a number of times in legal positions.
+	 * 
+	 * @param num number of ships you want to add to the ocean if ok
+	 * @param shipType type of ship you want to add
+	 * @return nothing.  no-op
+	 */
 	private void placeShipsInOceanIfOk(int num, String shipType) {
 	        int row;
 	        int column;
