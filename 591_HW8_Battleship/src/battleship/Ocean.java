@@ -77,6 +77,61 @@ public class Ocean {
 
 	}
 	
+	private void placeShipsInOceanIfOk(int num, String shipType) {
+	        int row;
+	        int column;
+	        boolean isHorizontal;
+	        Ship ship;
+
+	        for (int i = 0; i < num; i++) {
+	        	// create new ship per iteration
+	        	if (shipType.toLowerCase().equals("battleship")) {
+	        		ship = new Battleship();
+	        	} else if (shipType.toLowerCase().equals("cruiser")) {
+	        		ship = new Cruiser();
+	        	} else if (shipType.toLowerCase().equals("destroyer")) {
+	        		ship = new Destroyer();
+	        	} else {
+	        		ship = new Submarine();
+	        	}
+	            // randomly determine if horizontal.  0 = false, 1 = true
+	            isHorizontal = this.randInt(0, 2) == 1 ? true : false;
+	            if (isHorizontal) {
+	            	// can be any row 0-9, 
+	                row = this.randInt(0, 10);
+	                // column min is ship length - 1
+	                // e.g. battleship length 4, column can only be 3
+	                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
+	                column = this.randInt(ship.getLength() - 1, 10);
+	            } else {
+	            	// row min must be ship length - 1
+	            	// e.g. battleship length r, row can only be 3
+	                row = randInt(ship.getLength() - 1, 10);
+	                // column can be 0-9
+	                column = this.randInt(0,10);
+	            }
+
+	            boolean okToPlaceShip = ship.okToPlaceShipAt(row, column, isHorizontal, this);
+
+	            while (!okToPlaceShip) {
+	            	// if didn't work above, was false, the keep trying.
+	            	// same logic.  try to make helper
+	                isHorizontal = this.randInt(0, 2) == 1 ? true : false;
+	                if (isHorizontal) {
+	                    row = this.randInt(0, 10);
+	                    column = this.randInt(ship.getLength() - 1, 10);
+	                } else {
+	                    row = this.randInt(ship.getLength() - 1, 10);
+	                    column = this.randInt(0, 10);
+	                }
+	                
+	                okToPlaceShip = ship.okToPlaceShipAt(row, column, isHorizontal, this);
+	            }
+	            // either the for loop was true, or the while loop keep going until true
+	            ship.placeShipAt(row, column, isHorizontal, this);
+	        }
+	}
+	
 	private void createEmptyOcean() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -96,175 +151,180 @@ public class Ocean {
 		// Adam, maybe make helper function for random int with range like in python.
 		// i thought it was like python and kept getting error
 		
-        Random random = new Random();
-        int row;
-        int column;
-        boolean isHorizontal;
+//        Random random = new Random();
+//        int row;
+//        int column;
+//        boolean isHorizontal;
         // Place two battleships.
         // Adam, maybe we make a helper function.  I did a copy and paste for the other
         // three ships after I did the battleship and just replaced some variables
         // good case to make helper function.
-        // this will be used with the other Ship types
-        for (int i = 0; i < 1; i++) {
-        	// create ship
-            Ship battleship = new Battleship();
-            // randomly determine if horizontal.  0 = false, 1 = true
-            isHorizontal = random.nextBoolean();
-            if (isHorizontal) {
-            	// can be any row 0-9, 
-                row = this.randInt(0, 10);
-                // column min is ship length - 1
-                // e.g. battleship length 4, column can only be 3
-                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
-                column = this.randInt(battleship.getLength() - 1, 10);
-            } else {
-            	// row min must be ship length - 1
-            	// e.g. battleship length r, row can only be 3
-                row = randInt(battleship.getLength() - 1, 10);
-                // column can be 0-9
-                column = this.randInt(0,10);
-            }
+//        // this will be used with the other Ship types
+        this.placeShipsInOceanIfOk(1, "battleship");
+        this.placeShipsInOceanIfOk(2, "cruiser");
+        this.placeShipsInOceanIfOk(3, "destroyer");
+        this.placeShipsInOceanIfOk(4, "submarine");
 
-            boolean okToPlaceBattleship = battleship.okToPlaceShipAt(row, column, isHorizontal, this);
-
-            while (!okToPlaceBattleship) {
-            	// if didn't work above, was false, the keep trying.
-            	// same logic.  try to make helper
-                isHorizontal = random.nextBoolean();
-                if (isHorizontal) {
-                    row = this.randInt(0, 10);
-                    column = this.randInt(battleship.getLength() - 1, 10);
-                } else {
-                    row = this.randInt(battleship.getLength() - 1, 10);
-                    column = this.randInt(0, 10);
-                }
-                
-                okToPlaceBattleship = battleship.okToPlaceShipAt(row, column, isHorizontal, this);
-            }
-            // either the for loop was true, or the while loop keep going until true
-            battleship.placeShipAt(row, column, isHorizontal, this);
-        }
+//        for (int i = 0; i < 1; i++) {
+//        	// create ship
+//            Ship battleship = new Battleship();
+//            // randomly determine if horizontal.  0 = false, 1 = true
+//            isHorizontal = random.nextBoolean();
+//            if (isHorizontal) {
+//            	// can be any row 0-9, 
+//                row = this.randInt(0, 10);
+//                // column min is ship length - 1
+//                // e.g. battleship length 4, column can only be 3
+//                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
+//                column = this.randInt(battleship.getLength() - 1, 10);
+//            } else {
+//            	// row min must be ship length - 1
+//            	// e.g. battleship length r, row can only be 3
+//                row = randInt(battleship.getLength() - 1, 10);
+//                // column can be 0-9
+//                column = this.randInt(0,10);
+//            }
+//
+//            boolean okToPlaceBattleship = battleship.okToPlaceShipAt(row, column, isHorizontal, this);
+//
+//            while (!okToPlaceBattleship) {
+//            	// if didn't work above, was false, the keep trying.
+//            	// same logic.  try to make helper
+//                isHorizontal = random.nextBoolean();
+//                if (isHorizontal) {
+//                    row = this.randInt(0, 10);
+//                    column = this.randInt(battleship.getLength() - 1, 10);
+//                } else {
+//                    row = this.randInt(battleship.getLength() - 1, 10);
+//                    column = this.randInt(0, 10);
+//                }
+//                
+//                okToPlaceBattleship = battleship.okToPlaceShipAt(row, column, isHorizontal, this);
+//            }
+//            // either the for loop was true, or the while loop keep going until true
+//            battleship.placeShipAt(row, column, isHorizontal, this);
+//        }
         
         // above logic is reused for the other ships but for loop changes
-        for (int j = 0; j < 2; j++) {
-        	// create ship
-            Ship cruiser = new Cruiser();
-            // randomly determine if horizontal.  0 = false, 1 = true
-            isHorizontal = random.nextBoolean();
-            if (isHorizontal) {
-            	// can be any row 0-9, 
-                row = random.nextInt(10);
-                // column min is ship length - 1
-                // e.g. battleship length 4, column can only be 3
-                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
-                column = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
-            } else {
-            	// row min must be ship length - 1
-            	// e.g. battleship length r, row can only be 3
-                row = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
-                // column can be 0-9
-                column = random.nextInt(10);
-            }
-
-            boolean okToPlaceCruiser = cruiser.okToPlaceShipAt(row, column, isHorizontal, this);
-
-            while (!okToPlaceCruiser) {
-            	// if didn't work above, was false, the keep trying.
-            	// same logic.  try to make helper
-                isHorizontal = random.nextBoolean();
-                if (isHorizontal) {
-                    row = random.nextInt(10);
-                    column = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
-                } else {
-                    row = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
-                    column = random.nextInt(10);
-                }
-                
-                okToPlaceCruiser = cruiser.okToPlaceShipAt(row, column, isHorizontal, this);
-            }
-            // either the for loop was true, or the while loop keep going until true
-            cruiser.placeShipAt(row, column, isHorizontal, this);
-        }
-        
-        for (int k = 0; k < 3; k++) {
-        	// create ship
-            Ship destroyer = new Destroyer();
-            // randomly determine if horizontal.  0 = false, 1 = true
-            isHorizontal = random.nextBoolean();
-            if (isHorizontal) {
-            	// can be any row 0-9, 
-                row = random.nextInt(10);
-                // column min is ship length - 1
-                // e.g. battleship length 4, column can only be 3
-                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
-                column = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
-            } else {
-            	// row min must be ship length - 1
-            	// e.g. battleship length r, row can only be 3
-                row = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
-                // column can be 0-9
-                column = random.nextInt(10);
-            }
-
-            boolean okToPlaceDestroyer = destroyer.okToPlaceShipAt(row, column, isHorizontal, this);
-
-            while (!okToPlaceDestroyer) {
-            	// if didn't work above, was false, the keep trying.
-            	// same logic.  try to make helper
-                isHorizontal = random.nextBoolean();
-                if (isHorizontal) {
-                    row = random.nextInt(10);
-                    column = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
-                } else {
-                    row = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
-                    column = random.nextInt(10);
-                }
-                
-                okToPlaceDestroyer = destroyer.okToPlaceShipAt(row, column, isHorizontal, this);
-            }
-            // either the for loop was true, or the while loop keep going until true
-            destroyer.placeShipAt(row, column, isHorizontal, this);
-        }
-        
-        for (int k = 0; k < 4; k++) {
-        	// create ship
-            Ship submarine = new Submarine();
-            // randomly determine if horizontal.  0 = false, 1 = true
-            isHorizontal = random.nextBoolean();
-            if (isHorizontal) {
-            	// can be any row 0-9, 
-                row = random.nextInt(10);
-                // column min is ship length - 1
-                // e.g. battleship length 4, column can only be 3
-                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
-                column = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
-            } else {
-            	// row min must be ship length - 1
-            	// e.g. battleship length r, row can only be 3
-                row = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
-                // column can be 0-9
-                column = random.nextInt(10);
-            }
-
-            boolean okToPlaceSubmarine = submarine.okToPlaceShipAt(row, column, isHorizontal, this);
-
-            while (!okToPlaceSubmarine) {
-            	// if didn't work above, was false, the keep trying.
-            	// same logic.  try to make helper
-                isHorizontal = random.nextBoolean();
-                if (isHorizontal) {
-                    row = random.nextInt(10);
-                    column = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
-                } else {
-                    row = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
-                    column = random.nextInt(10);
-                }
-                
-                okToPlaceSubmarine = submarine.okToPlaceShipAt(row, column, isHorizontal, this);
-            }
-            // either the for loop was true, or the while loop keep going until true
-            submarine.placeShipAt(row, column, isHorizontal, this);
-        }
+////        for (int j = 0; j < 2; j++) {
+////        	// create ship
+////            Ship cruiser = new Cruiser();
+////            // randomly determine if horizontal.  0 = false, 1 = true
+////            isHorizontal = random.nextBoolean();
+////            if (isHorizontal) {
+////            	// can be any row 0-9, 
+////                row = random.nextInt(10);
+////                // column min is ship length - 1
+////                // e.g. battleship length 4, column can only be 3
+////                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
+////                column = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
+////            } else {
+////            	// row min must be ship length - 1
+////            	// e.g. battleship length r, row can only be 3
+////                row = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
+////                // column can be 0-9
+////                column = random.nextInt(10);
+////            }
+//
+//            boolean okToPlaceCruiser = cruiser.okToPlaceShipAt(row, column, isHorizontal, this);
+//
+//            while (!okToPlaceCruiser) {
+//            	// if didn't work above, was false, the keep trying.
+//            	// same logic.  try to make helper
+//                isHorizontal = random.nextBoolean();
+//                if (isHorizontal) {
+//                    row = random.nextInt(10);
+//                    column = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
+//                } else {
+//                    row = random.nextInt(10 - cruiser.getLength() - 1) + cruiser.getLength() - 1;
+//                    column = random.nextInt(10);
+//                }
+//                
+//                okToPlaceCruiser = cruiser.okToPlaceShipAt(row, column, isHorizontal, this);
+//            }
+//            // either the for loop was true, or the while loop keep going until true
+//            cruiser.placeShipAt(row, column, isHorizontal, this);
+//        }
+//        
+//        for (int k = 0; k < 3; k++) {
+//        	// create ship
+//            Ship destroyer = new Destroyer();
+//            // randomly determine if horizontal.  0 = false, 1 = true
+//            isHorizontal = random.nextBoolean();
+//            if (isHorizontal) {
+//            	// can be any row 0-9, 
+//                row = random.nextInt(10);
+//                // column min is ship length - 1
+//                // e.g. battleship length 4, column can only be 3
+//                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
+//                column = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
+//            } else {
+//            	// row min must be ship length - 1
+//            	// e.g. battleship length r, row can only be 3
+//                row = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
+//                // column can be 0-9
+//                column = random.nextInt(10);
+//            }
+//
+//            boolean okToPlaceDestroyer = destroyer.okToPlaceShipAt(row, column, isHorizontal, this);
+//
+//            while (!okToPlaceDestroyer) {
+//            	// if didn't work above, was false, the keep trying.
+//            	// same logic.  try to make helper
+//                isHorizontal = random.nextBoolean();
+//                if (isHorizontal) {
+//                    row = random.nextInt(10);
+//                    column = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
+//                } else {
+//                    row = random.nextInt(10 - destroyer.getLength() - 1) + destroyer.getLength() - 1;
+//                    column = random.nextInt(10);
+//                }
+//                
+//                okToPlaceDestroyer = destroyer.okToPlaceShipAt(row, column, isHorizontal, this);
+//            }
+//            // either the for loop was true, or the while loop keep going until true
+//            destroyer.placeShipAt(row, column, isHorizontal, this);
+//        }
+//        
+//        for (int k = 0; k < 4; k++) {
+//        	// create ship
+//            Ship submarine = new Submarine();
+//            // randomly determine if horizontal.  0 = false, 1 = true
+//            isHorizontal = random.nextBoolean();
+//            if (isHorizontal) {
+//            	// can be any row 0-9, 
+//                row = random.nextInt(10);
+//                // column min is ship length - 1
+//                // e.g. battleship length 4, column can only be 3
+//                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
+//                column = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
+//            } else {
+//            	// row min must be ship length - 1
+//            	// e.g. battleship length r, row can only be 3
+//                row = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
+//                // column can be 0-9
+//                column = random.nextInt(10);
+//            }
+//
+//            boolean okToPlaceSubmarine = submarine.okToPlaceShipAt(row, column, isHorizontal, this);
+//
+//            while (!okToPlaceSubmarine) {
+//            	// if didn't work above, was false, the keep trying.
+//            	// same logic.  try to make helper
+//                isHorizontal = random.nextBoolean();
+//                if (isHorizontal) {
+//                    row = random.nextInt(10);
+//                    column = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
+//                } else {
+//                    row = random.nextInt(10 - submarine.getLength() - 1) + submarine.getLength() - 1;
+//                    column = random.nextInt(10);
+//                }
+//                
+//                okToPlaceSubmarine = submarine.okToPlaceShipAt(row, column, isHorizontal, this);
+//            }
+//            // either the for loop was true, or the while loop keep going until true
+//            submarine.placeShipAt(row, column, isHorizontal, this);
+//        }
 	}
 
 	boolean isOccupied(int row, int column) {
