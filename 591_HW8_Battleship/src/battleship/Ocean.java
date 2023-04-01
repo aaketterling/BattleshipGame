@@ -422,7 +422,69 @@ public class Ocean {
 
 	void print() {
 		// TODO
+		// for each location in the 10 by 10 array (the “ocean”)
+		// if the location contains a ship that is sunk or if the location has been shot at, and was hit or nothing was found
+		// print the ship itself -- this will call toString in the Ship class or any Ship subclass which has toString defined (i.e. EmptySea)
+		// otherwise print “.”
+		
+		// 10 x 10 grid
+		// print top row headers
+		System.out.print(" "); // space for top left corner
+		// column numbers with space between
+		for (int i = 0; i < 10; i++) {
+			System.out.print(" " + i);
+		}
+		
+		// go to next line
+		System.out.println();
+		
+		// print each row label
+		for (int j = 0; j < 10; j++) {
+			System.out.print(j);
+			// for each row, print each ship at each row x column "cell" like in a spreadsheet
+			for (int k = 0; k < 10; k++) {
+				// get ship at cell
+				Ship shipAtCell = this.getShipArray()[j][k];
+				
+				// contains a ship?
+				if (this.isOccupied(j, k)) {
+					// if it is sunk, the toString will print what is appropriate
+                    if (shipAtCell.isHorizontal()) {
+                        if (shipAtCell.getHit()[shipAtCell.getBowColumn() - k]) {
+                        	// if hit print if is is s or x
+                            System.out.print(" " + shipAtCell);
+                        } else {
+                        	// not yet hit
+                            System.out.print(" " + ".");
+                        }
+                    } else {
+                        if (shipAtCell.getHit()[shipAtCell.getBowRow() - j]) {
+                        	// if hit print if is is s or x
+                            System.out.print(" " + shipAtCell);
+                        } else {
+                        	// not yet hit
+                            System.out.print(" " + ".");
+                        }
+                    }
+				
+				} else {
+					// is empty
+					
+					// the cell is hit.  note empty sea is 1 length so bow is at hit[0]
+                    if (shipAtCell.getHit()[0]) {
+                    	// System.out.print will convert Ship type toString automatically 
+                        System.out.print(" " + shipAtCell);
+                    } else {
+                    	// not hit
+                        System.out.print(" " + ".");
+                    }
+				}
 
+			}
+			// go to next line
+			System.out.println();
+		}
+		
 	}
 
 	// for debugging only
