@@ -450,6 +450,8 @@ public class Ocean {
 				if (this.isOccupied(j, k)) {
 					// if it is sunk, the toString will print what is appropriate
                     if (shipAtCell.isHorizontal()) {
+                    	// if k = bowColumn, then in bow, hit[0], else subtract to go left to get index in hit array
+                    	// 0 bowcolumn, 1 bowcolumn - 1, ...
                         if (shipAtCell.getHit()[shipAtCell.getBowColumn() - k]) {
                         	// if hit print if is is s or x
                             System.out.print(" " + shipAtCell);
@@ -458,6 +460,8 @@ public class Ocean {
                             System.out.print(" " + ".");
                         }
                     } else {
+                    	// if k = bowRow, then in bow, hit[0], else subtract to go up to get index in hit array
+                    	// 0 bowRow, 1 bowRow - 1, ...
                         if (shipAtCell.getHit()[shipAtCell.getBowRow() - j]) {
                         	// if hit print if is is s or x
                             System.out.print(" " + shipAtCell);
