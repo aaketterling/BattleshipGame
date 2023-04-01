@@ -355,7 +355,48 @@ public class Ocean {
 
 	boolean shootAt(int row, int column) {
 		// TODO
-		return false;
+		// Returns true if the given location contains a ”real” ship, still afloat, (not
+		// an EmptySea), false if it does not. In addition, this method updates the
+		// number of shots that have been fired, and the number of hits.
+		// Note: If a location contains a “real” ship, shootAt should return true every
+		// time the user shoots at that same location. Once a ship has been ”sunk”,
+		// additional shots at its location should return false.
+		
+		// update number of shots that have been fired
+		// TODO for this entire method. create helper methods so we don't directly
+		// update private instance variables.  e.g. this.incrementShotsFired(1)
+		this.shotsFired += 1; 
+		// get ship type at row, column
+        Ship ship = this.getShipArray()[row][column];
+        
+        // is it a real ship
+        if (this.isOccupied(row, column)) {
+        	// is it a float
+        	if (!ship.isSunk()) {
+        		// update number of hits
+        		this.hitCount += 1;
+				// The shootAt method in the Ocean class will call the shootAt method in the
+				// ship (or EmptySea), in that particular location
+        		ship.shootAt(row, column);
+        		
+        		// check if after you hit the ship, if it sunk
+        		if (ship.isSunk()) {
+        			// update ships sunk
+        			this.shipsSunk += 1;
+        		}
+        		return true;
+        	} else {
+        		// don't shootAt sunk ship? don't update hit count?
+        		return false;
+        	}
+        	
+        } else {
+        	// it is empty
+			// The shootAt method in the Ocean class will call the shootAt method in the
+			// ship (or EmptySea), in that particular location
+        	ship.shootAt(row, column);
+    		return false;
+        }
 	}
 
 	int getShotsFired() {
