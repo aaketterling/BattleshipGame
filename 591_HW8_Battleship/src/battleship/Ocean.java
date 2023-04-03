@@ -79,7 +79,7 @@ public class Ocean {
 	
 	
 	/**
-	 * Adds a certain type of ship a number of times in legal positions.
+	 * Adds a certain type of ship a number of times in legal positions in the ocean.
 	 * 
 	 * @param num number of ships you want to add to the ocean if ok
 	 * @param shipType type of ship you want to add
@@ -109,7 +109,6 @@ public class Ocean {
 	                row = this.randInt(0, 10);
 	                // column min is ship length - 1
 	                // e.g. battleship length 4, column can only be 3
-	                // 10 - 4 - 1 is nextInt(7) i.e. 0-6, now add 4 - 1.  range is 3 - 9
 	                column = this.randInt(ship.getLength() - 1, 10);
 	            } else {
 	            	// row min must be ship length - 1
