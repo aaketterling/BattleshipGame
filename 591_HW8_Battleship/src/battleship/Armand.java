@@ -31,6 +31,48 @@ public class Armand {
 		battleShipOcean.printWithShips();
 		System.out.println();
 		battleShipOcean.print();
+		
+		
+		// test is game over.
+		Ocean battleShipOcean2 = new Ocean();
+		
+		Ship sub1 = new Submarine();
+		Ship sub2 = new Submarine();
+		Ship sub3 = new Submarine();
+		Ship sub4 = new Submarine();
+		Ship sub5 = new Submarine();
+		Ship sub6 = new Submarine();
+		Ship sub7 = new Submarine();
+		Ship sub8 = new Submarine();
+		Ship sub9 = new Submarine();
+		Ship sub10 = new Submarine();
+		sub1.placeShipAt(0, 0, false, battleShipOcean2);
+		sub2.placeShipAt(0, 9, false, battleShipOcean2);
+		sub3.placeShipAt(9, 0, false, battleShipOcean2);
+		sub4.placeShipAt(9, 9, false, battleShipOcean2);
+		sub5.placeShipAt(2, 0, false, battleShipOcean2);
+		sub6.placeShipAt(4, 0, false, battleShipOcean2);
+		sub7.placeShipAt(6, 0, false, battleShipOcean2);
+		sub8.placeShipAt(0, 3, false, battleShipOcean2);
+		sub9.placeShipAt(0, 5, false, battleShipOcean2);
+		sub10.placeShipAt(0, 7, false, battleShipOcean2);
+		battleShipOcean2.printWithShips();
+		battleShipOcean2.shootAt(0, 0);
+		battleShipOcean2.shootAt(0, 9);
+		battleShipOcean2.shootAt(9, 0);
+		battleShipOcean2.shootAt(9, 9);
+		battleShipOcean2.shootAt(2, 0);
+		battleShipOcean2.shootAt(4, 0);
+		battleShipOcean2.shootAt(6, 0);
+		battleShipOcean2.shootAt(0, 3);
+		battleShipOcean2.shootAt(0, 5);
+		System.out.println(battleShipOcean2.isGameOver() ? "[issue]should not be true only 9 ships sank" : "only 9 ships sank");
+		battleShipOcean2.shootAt(0, 7);
+		System.out.println(battleShipOcean2.isGameOver() ? "Game is over, 10 ships sank" : "[issue] 10 ships should have sank");
+
+		
+
+
 //		Ship battleShip = new Battleship();
 //		Ship cruiserShip = new Cruiser();
 //		
