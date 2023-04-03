@@ -16,7 +16,8 @@ public class EmptySea extends Ship {
 	boolean shootAt(int row, int column) {
 		// always returns false
 		// set hit to true, overrides the Ship.shootAt
-        this.getHit()[0] = true;
+//        this.getHit()[0] = true;
+		super.shootAt(row, column);
 		return false;
 	}
 
