@@ -48,11 +48,6 @@ public abstract class Ship {
 
 	
 	// constructor
-	
-	private boolean isEmpty(Ship ship) {
-		  return "empty".equals(ship.getShipType());
-		 }
-	
 	public Ship(int length) {
 		this.length = length;
 		// initialize hit array based on length
@@ -101,9 +96,7 @@ public abstract class Ship {
 
 	// other methods
 
-	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-		Ship[][] shipArray = ocean.getShipArray();
-	
+	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {	
 		/*
 		 *	logic depends if horizontal
 		 *	check if ship is within the 10x10 array
@@ -124,8 +117,6 @@ public abstract class Ship {
 		Check if the ship overlaps or touches another ship (vertically, horizontally, or diagonally). If it does, return false.
 		
 		If the ship's position is within bounds and doesn't overlap or touch another ship, return true.
-		
-		
 		 * 
 		 */
 		
@@ -148,7 +139,7 @@ public abstract class Ship {
 	                // Check if the current position is within the ocean bounds
 	    			if (i >= 0 && i < 10 && j >= 0 && j < 10) {
 	                    // If there is already a ship at this position, return false
-	                    if (!this.isEmpty(shipArray[i][j])) {
+	                    if (ocean.isOccupied(i, j)) {
 	                        return false;
 	                    }
 	                }
@@ -161,7 +152,7 @@ public abstract class Ship {
 	                // Check if the current position is within the ocean bounds
 	    			if (i >= 0 && i < 10 && j >= 0 && j < 10) {
 	                    // If there is already a ship at this position, return false
-	                    if (!this.isEmpty(shipArray[i][j])) {
+	                    if (ocean.isOccupied(i, j)) {
 	                        return false;
 	                    }
 	                }
