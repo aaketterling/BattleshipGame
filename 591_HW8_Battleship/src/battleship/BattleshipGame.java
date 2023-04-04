@@ -83,6 +83,12 @@ public class BattleshipGame {
 		return response;
 	}
 
+	/**
+	 * Prints message of the game when it is over and some stats of your game
+	 * 
+	 * @param ocean the ocean with the ships that has information on the game
+	 * @return nothing. no-op
+	 */
 	void printSummary(Ocean ocean) {
 		System.out.println("You won! you sank all the ships!");
 		System.out.println("The number of shots fired " + ocean.getShotsFired());
