@@ -57,11 +57,6 @@ public class Ocean {
 	
 	// methods 
 	
-	// this will be used within 
-	public int getDimension() {
-	    return 10;
-	}
-	
 	// helper methods
 	
 	/**
@@ -74,7 +69,6 @@ public class Ocean {
         Random random = new Random();
         
         return random.nextInt(max - min) + min;
-
 	}
 	
 	
