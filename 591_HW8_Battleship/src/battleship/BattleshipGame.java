@@ -20,7 +20,13 @@ public class BattleshipGame {
 	// print results
 
 	// helper to get user input
-
+	/**
+	 * Helper method to get player input for row and column for shootAt method
+	 * 
+	 * @param scanner to get user input
+	 * @return array of integers of length 2. first element is row, second element
+	 *         is column
+	 */
 	int[] getUserRowColumnInput(Scanner scanner) {
 		// variables for response
 		int[] response = new int[2];
@@ -89,27 +95,34 @@ public class BattleshipGame {
 	}
 
 	void run() {
+		// for getUserRowColumnInput method
 		Scanner scanner = new Scanner(System.in);
 
 		Ocean ocean = new Ocean();
 		ocean.placeAllShipsRandomly();
+		// for while loop. it will be false when first initialized
 		boolean isGameOver = ocean.isGameOver();
 
+		// keep playing until game is over. when all ships sank. there are 10 ships
 		while (!isGameOver) {
+			// for debugging only
 			ocean.printWithShips();
+			// show sea
 			ocean.print();
 
-			// give summary
+			// give summary of how many shots fired so far
 			System.out.println("The number of shots fired " + ocean.getShotsFired());
 			// ask for row and column
 			int[] userInput = this.getUserRowColumnInput(scanner);
 			// take shot
 			if (ocean.shootAt(userInput[0], userInput[1])) {
+				// display message if the shot hit a ship
 				System.out.println("You hit a ship!, keep going!");
 			} else {
+				// display message if the missed and did not hit a ship
 				System.out.println("You missed, try again.");
 			}
-
+			// check if you the last ship after you made a shot
 			isGameOver = ocean.isGameOver();
 		}
 
