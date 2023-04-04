@@ -205,14 +205,14 @@ public abstract class Ship {
 
 	    // Does the ship occupy the given location (row, column)
 	    if (horizontal) {
-	        if (row == bowRow && column <= bowColumn && column > bowColumn - length) {
+	        if (row == this.getBowRow() && column <= this.getBowColumn() && column > this.getBowColumn() - this.getLength()) {
 	            // Calculate the index of the hit section and update the hit array
 	            int hitIndex = bowColumn - column;
 	            hit[hitIndex] = true;
 	            return true;
 	        }
 	    } else {
-	        if (column == bowColumn && row <= bowRow && row > bowRow - length) {
+	        if (column == this.getBowColumn() && row <= this.getBowRow() && row > this.getBowRow() - this.getLength()) {
 	            // Calculate the index of the hit section and update the hit array
 	            int hitIndex = bowRow - row;
 	            hit[hitIndex] = true;
