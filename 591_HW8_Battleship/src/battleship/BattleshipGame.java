@@ -26,7 +26,63 @@ public class BattleshipGame {
 	// print congrats message
 	// print results
 	
-
+	// helper to get user input
+	
+	int[] getUserRowColumnInput(Scanner scanner) {
+		// variables for response
+		int[] response = new int[2];
+		int row;
+		int column;
+		// will use in while loop until we get valid input
+		boolean validInput = false;
+		while(!validInput) {
+			// ask user for row and column
+			System.out.print("Enter row,column: ");
+			
+			// get input as string
+			String input = scanner.nextLine().trim();
+			
+			// check if there is a comma
+			if (!input.contains(",")) {
+				validInput = false;
+				continue;
+			}
+			
+			// split string by comma "," into String array
+			String[] inputArray = input.split(",");
+			
+			// check if length is not 2 and continue
+			if (inputArray.length != 2) {
+				validInput = false;
+				continue;
+			}
+			
+			try {
+				// try to parse string to in and clean whitespaces
+				row = Integer.parseInt(inputArray[0].trim());
+				column = Integer.parseInt(inputArray[1].trim());
+				// update response array
+				response[0] = row;
+				response[1] = column;
+				// update valid input to true to stop while loop
+				validInput = true;
+			} catch (NumberFormatException e) {
+				// continue loop again
+				validInput = false;
+				continue;
+			}
+			
+		}
+	
+		return response;
+	}
+	
+	void printSummary(Ocean ocean) {
+		System.out.println("You won! you sank all the ships!");
+		System.out.println("The number of shots fired " + ocean.getShotsFired());
+		System.out.println("The number of hits made " + ocean.getHitCount());
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new BattleshipGame().run();
@@ -38,8 +94,6 @@ public class BattleshipGame {
 		Ocean ocean = new Ocean();
 		ocean.placeAllShipsRandomly();
 		boolean isGameOver = ocean.isGameOver();
-		int row;
-		int column;
 		
 		while(!isGameOver) {
 			ocean.printWithShips();
@@ -48,51 +102,15 @@ public class BattleshipGame {
 			// give summary
 			System.out.println("The number of shots fired " + ocean.getShotsFired());
 			// ask for row and column
-			// TODO make this into a method
-			System.out.print("enter a row and column separated by , ");
-			String rowAndColumnString = scanner.nextLine().trim();
-			System.out.println(rowAndColumnString);
-			
-			// check in input has a comma ","
-			if (!rowAndColumnString.contains(",")) {
-				System.out.println("Invalid input");
-			} 
-			
-			try {
-				String[] rowAndColumn = rowAndColumnString.split(",");
-				// check if array is length 2
-				
-				if (rowAndColumn.length != 2) {
-					System.out.println("Invalid input");
-				}
-				
-				row = Integer.parseInt(rowAndColumn[0].trim());
-				column = Integer.parseInt(rowAndColumn[1].trim());
-				
-				// check if row and column in bounds
-				if (row < 0 || row > 9) {
-					System.out.println("Invalid input");
-				}
-				
-				if (column < 0 || column > 9) {
-					System.out.println("Invalid input");
-				}
-				
-			} catch (NumberFormatException e) {
-				System.out.println("invalid input");
-				continue;
-			}
-			System.out.println(row);
-			System.out.println(column);
-			ocean.shootAt(row, column);
+			int[] userInput = this.getUserRowColumnInput(scanner);
+			// take shot
+			ocean.shootAt(userInput[0], userInput[1]);
 			isGameOver = ocean.isGameOver();
 		}
 		
 		scanner.close();
 		
 		// make a printGameSummary method
-		System.out.println("You won! you sank all the ships!");
-		System.out.println("The number of shots fired " + ocean.getShotsFired());
-		System.out.println("The number of hits made " + ocean.getHitCount());
+		this.printSummary(ocean);
 	}
 }
