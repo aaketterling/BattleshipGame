@@ -10,15 +10,6 @@ public class BattleshipGame {
 	 * print number of shots taken print number of hits made
 	 */
 
-	/*
-	 * helper method to keep asking for string with 2 numbers separated by comma
-	 * 
-	 */
-
-	// play until game is over
-	// print congrats message
-	// print results
-
 	// helper to get user input
 	/**
 	 * Helper method to get player input for row and column for shootAt method
@@ -117,17 +108,30 @@ public class BattleshipGame {
 			ocean.print();
 
 			// give summary of how many shots fired so far
-			System.out.println("The number of shots fired " + ocean.getShotsFired());
+			System.out.println("Hit count: " + ocean.getShotsFired());
 			// ask for row and column
 			int[] userInput = this.getUserRowColumnInput(scanner);
 			// take shot
 			if (ocean.shootAt(userInput[0], userInput[1])) {
-				// display message if the shot hit a ship
-				System.out.println("You hit a ship!, keep going!");
+				// display message if the shot hit a ship or sunk it
+				
+				// get ship
+				Ship ship = ocean.getShipArray()[userInput[0]][userInput[1]];
+				
+				if (ship.isSunk()) {
+					System.out.println("You sunk a ship (" + ship.getShipType() + ")!");
+
+				} else {
+					System.out.println("You hit a ship!, keep going!");
+				}
 			} else {
 				// display message if the missed and did not hit a ship
 				System.out.println("You missed, try again.");
 			}
+			
+			// create blank line
+			System.out.println();
+			
 			// check if you the last ship after you made a shot
 			isGameOver = ocean.isGameOver();
 		}
