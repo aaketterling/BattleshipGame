@@ -61,9 +61,17 @@ public class BattleshipGame {
 				// try to parse string to in and clean whitespaces
 				row = Integer.parseInt(inputArray[0].trim());
 				column = Integer.parseInt(inputArray[1].trim());
+				
+				// check if row and column within range
+				if (row < 0 || row > 9 || column < 0 || column > 9) {
+					validInput = false;
+					continue;
+				}
+				
 				// update response array
 				response[0] = row;
 				response[1] = column;
+				
 				// update valid input to true to stop while loop
 				validInput = true;
 			} catch (NumberFormatException e) {
@@ -104,7 +112,12 @@ public class BattleshipGame {
 			// ask for row and column
 			int[] userInput = this.getUserRowColumnInput(scanner);
 			// take shot
-			ocean.shootAt(userInput[0], userInput[1]);
+			if (ocean.shootAt(userInput[0], userInput[1])) {
+				System.out.println("You hit a ship!, keep going!");
+			} else {
+				System.out.println("You missed, try again.");
+			}
+			
 			isGameOver = ocean.isGameOver();
 		}
 		
