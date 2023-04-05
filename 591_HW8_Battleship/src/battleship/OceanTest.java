@@ -117,10 +117,22 @@ class OceanTest {
 		horizontal = false;
 		submarine.placeShipAt(row, column, horizontal, ocean);
 		
+		Destroyer destroyer1 = new Destroyer();
+		row = 8;
+		column = 6;
+		horizontal = false;
+		destroyer1.placeShipAt(row, column, horizontal, ocean);
+		
 		assertTrue(ocean.isOccupied(1, 5));
 		
 		//TODO
-		//More tests
+		// two more tests
+		//Test 2: That a spot in the ocean is empty. 
+		assertFalse(ocean.isOccupied(8, 8));
+		
+		//Test 3: Check new destroy's body is in the way 
+		assertTrue(ocean.isOccupied(7, 6));		
+		
 	}
 
 	@Test
@@ -139,7 +151,43 @@ class OceanTest {
 		assertTrue(ocean.shootAt(0, 5));
 		
 		//TODO
-		//More tests
+		//Test 2: Shooting at sunk ship should return false. 
+	    Destroyer destroyernew = new Destroyer();
+	    int row1 = 3;
+	    int column1 = 3;
+	    boolean horizontal1 = true;
+	    destroyernew.placeShipAt(row1, column1, horizontal1, ocean);
+	    
+	    assertTrue(ocean.shootAt(3, 3));
+	    assertTrue(ocean.shootAt(3, 2));
+	    assertTrue(destroyernew.isSunk());
+	    
+	    // Shooting at a sunk ship should return false
+	    assertFalse(ocean.shootAt(3, 3));
+	    assertFalse(ocean.shootAt(3, 4));
+	    
+	    //Test 3: Tests if the shootAt method can handle shooting at multiple ships in the ocean. If one ship is not sunk completely. 
+	    Destroyer destroyer1 = new Destroyer();
+	    int row2 = 5;
+	    int column2 = 1;
+	    boolean horizontal2 = true;
+	    destroyer1.placeShipAt(row2, column2, horizontal2, ocean);
+	    
+	    Destroyer destroyer2 = new Destroyer();
+	    int row3 = 7;
+	    int column3 = 6;
+	    boolean horizontal3 = false;
+	    destroyer2.placeShipAt(row3, column3, horizontal3, ocean);
+	    
+	    assertTrue(ocean.shootAt(5, 1));
+	    assertFalse(ocean.shootAt(5, 2));
+	    assertFalse(destroyer1.isSunk());
+	    
+	    assertTrue(ocean.shootAt(7, 6));
+	    assertFalse(ocean.shootAt(8, 6));
+	    assertFalse(destroyer2.isSunk());
+	    
+	    
 	}
 
 	@Test
@@ -171,7 +219,10 @@ class OceanTest {
 		assertEquals(6, ocean.getShotsFired());
 		
 		//TODO
-		//More tests
+		//Test 3: Test if shots fired counts shoots that happen in the same place as prior to ships being added and after ships have been sunk. 
+		assertFalse(ocean.shootAt(0, 1));		
+		assertFalse(ocean.shootAt(1, 5));
+		assertEquals(8, ocean.getShotsFired());
 	}
 
 	@Test
@@ -206,7 +257,18 @@ class OceanTest {
 		assertEquals(0, ocean.getShipsSunk());
 		
 		//TODO
-		//More tests
+		//Test 2: if works when ship is hit again is destroy sunk with 2 hits. 
+		assertTrue(ocean.shootAt(0, 5));
+		assertTrue(destroyer.isSunk());
+		assertEquals(2, ocean.getHitCount());
+		assertEquals(1, ocean.getShipsSunk());
+		
+		//Test 3: if more shoots are fired does the shootAT method add to getHitCount or getShips Sunk? 
+		assertFalse(ocean.shootAt(0, 5));
+		assertFalse(ocean.shootAt(3, 5));
+		assertTrue(destroyer.isSunk());
+		assertEquals(2, ocean.getHitCount());
+		assertEquals(1, ocean.getShipsSunk());
 	}
 
 	@Test
@@ -220,6 +282,17 @@ class OceanTest {
 		
 		//TODO
 		//More tests
+		// Test if getShipArray() returns the correct Ship array after placing a ship
+		Ship battleship = new Battleship();
+		battleship.placeShipAt(5, 5, true, ocean);
+		Ship[][] updatedShipArray = ocean.getShipArray();
+		assertEquals(battleship, updatedShipArray[5][5]);
+		
+		// Test if getShipArray() allows modifications to the array by updating a Ship object
+		Ship cruiser = new Cruiser();
+		updatedShipArray[3][3] = cruiser;
+		Ship[][] modifiedShipArray = ocean.getShipArray();
+		assertEquals(cruiser, modifiedShipArray[3][3]);
 	}
 
 }
