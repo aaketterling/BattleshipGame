@@ -352,12 +352,23 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		
+		//Test when the ship is not hit
 		assertFalse(battleship.shootAt(1, 9));
 		boolean[] hitArray0 = {false, false, false, false};
 		assertArrayEquals(hitArray0, battleship.getHit());
 		
 		//TODO
-		//More tests
+		// Test 2: when the ship is hit
+		assertTrue(battleship.shootAt(0, 9));
+		boolean[] hitArray1 = {true, false, false, false};
+		assertArrayEquals(hitArray1, battleship.getHit());
+
+		// Test 3: when the ship is sunk
+		battleship.shootAt(0, 8);
+		battleship.shootAt(0, 7);
+		assertTrue(battleship.shootAt(0, 6));
+		boolean[] hitArray2 = {true, true, true, true};
+		assertArrayEquals(hitArray2, battleship.getHit());
 	}
 	
 	@Test
@@ -374,7 +385,29 @@ class ShipTest {
 		assertFalse(submarine.isSunk());
 		
 		//TODO
-		//More tests
+		// Test 2: when a ship is sunk after being hit multiple times
+		Ship destroyer = new Destroyer();
+		row = 6;
+		column = 6;
+		horizontal = false;
+		destroyer.placeShipAt(row, column, horizontal, ocean);
+
+		assertFalse(destroyer.isSunk());
+		assertTrue(destroyer.shootAt(6, 6));
+		assertFalse(destroyer.isSunk());
+		assertTrue(destroyer.shootAt(5, 6));
+		assertTrue(destroyer.isSunk());
+
+		// Test 3: when a ship is not sunk after being hit partially
+		Ship cruiser = new Cruiser();
+		row = 1;
+		column = 3;
+		horizontal = true;
+		cruiser.placeShipAt(row, column, horizontal, ocean);
+
+		assertFalse(cruiser.isSunk());
+		assertTrue(cruiser.shootAt(1, 3));
+		assertFalse(cruiser.isSunk());
 		
 	}
 
@@ -392,7 +425,20 @@ class ShipTest {
 		assertEquals("x", battleship.toString());
 		
 		//TODO
-		//More tests
+		// Test 2: when the ship has been hit only once (partially sunk)
+		Ship cruiser = new Cruiser();
+		row = 5;
+		column = 5;
+		horizontal = true;
+		cruiser.placeShipAt(row, column, horizontal, ocean);
+		cruiser.shootAt(5, 5);
+		assertEquals("x", cruiser.toString());
+
+		// Test 3: when the ship has been completely sunk
+		for (int i = 0; i < cruiser.getLength(); i++) {
+			cruiser.shootAt(row, column - i);
+		}
+		assertEquals("s", cruiser.toString());
 	}
 
 }
