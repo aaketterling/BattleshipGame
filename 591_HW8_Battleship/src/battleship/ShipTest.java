@@ -21,11 +21,11 @@ class ShipTest {
 		assertEquals(4, ship.getLength());
 		
 		//TODO
-		//Test 2: test Cruiser
+		//Test 2: test Cruiser getLength of different ship
 		ship = new Cruiser();
 		assertEquals(3, ship.getLength());
 		
-		//Test 3: test Submarine
+		//Test 3: test Submarine getLength of smallest ship
 		ship = new Submarine();
 		assertEquals(1, ship.getLength());
 	}
@@ -40,7 +40,7 @@ class ShipTest {
 		assertEquals(row, battleship.getBowRow());
 		
 		//TODO
-		// Test 2: for Cruiser
+		// Test 2: for Cruiser Placing different ship near boarder 
 		Ship cruiser = new Cruiser();
 		row = 3;
 		column = 2;
@@ -48,7 +48,7 @@ class ShipTest {
 		cruiser.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, cruiser.getBowRow());
 		
-		// Test 3: for Destroyer
+		// Test 3: for Destroyer placement in middle of board. 
 		Ship destroyer = new Destroyer();
 		row = 5;
 		column = 7;
@@ -68,7 +68,7 @@ class ShipTest {
 		assertEquals(column, battleship.getBowColumn());	
 		
 		//TODO
-		// Test 2: for Cruiser
+		// Test 2: for Cruiser Placing different ship near boarder
 		Ship cruiser = new Cruiser();
 		row = 3;
 		column = 2;
@@ -77,7 +77,7 @@ class ShipTest {
 		cruiser.setBowColumn(column);
 		assertEquals(column, cruiser.getBowColumn());;
 		
-		// Test 3: for Destroyer
+		// Test 3: for Destroyer placement in middle of board.
 		Ship destroyer = new Destroyer();
 		row = 5;
 		column = 7;
@@ -98,7 +98,7 @@ class ShipTest {
 		assertFalse(ship.getHit()[1]);
 		
 		//TODO
-		// Test 2: for Cruiser
+		// Test 2: for Cruiser 
 		Ship cruiser = new Cruiser();
 		boolean[] hitsCruiser = new boolean[3];
 		assertArrayEquals(hitsCruiser, cruiser.getHit());
@@ -123,7 +123,7 @@ class ShipTest {
 		ship = new Cruiser();
 		assertEquals("cruiser", ship.getShipType());
 		
-		//Test 3: Destroyer with lower case
+		//Test 3: Different ship Destroyer with lower case
 		ship = new Destroyer();
 		assertEquals("destroyer", ship.getShipType());
 	}
@@ -215,7 +215,7 @@ class ShipTest {
 		cruiser.setHorizontal(horizontal1);
 		assertTrue(cruiser.isHorizontal());
 		
-		//Test 3: Destroyer  does this ship work with SetHorizontal 
+		//Test 3: Destroyer does this ship work with SetHorizontal 
 		Ship destroyer1 = new Destroyer();
 		boolean horizontal2 = true;
 		destroyer1.setHorizontal(horizontal2);
