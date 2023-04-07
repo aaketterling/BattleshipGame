@@ -7,7 +7,6 @@ public class Cruiser extends Ship {
 	static final int LENGTH = 3;
 	static final String TYPE = "cruiser";
 
-
 	public Cruiser() {
 		super(Cruiser.LENGTH);
 	}

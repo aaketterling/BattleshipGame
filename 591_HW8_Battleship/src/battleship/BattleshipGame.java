@@ -108,7 +108,7 @@ public class BattleshipGame {
 			ocean.print();
 
 			// give summary of how many shots fired so far
-			System.out.println("Hit count: " + ocean.getShotsFired());
+			System.out.println("Shots fired: " + ocean.getShotsFired());
 			// ask for row and column
 			int[] userInput = this.getUserRowColumnInput(scanner);
 			// take shot

@@ -1,33 +1,14 @@
 package battleship;
 
 /**
- *  Ship describes the Characteristics common to all ships
+ * Ship describes the Characteristics common to all ships
+ * 
  * @author adamkett
  *
  */
 public abstract class Ship {
-	
-	/*make subclasses: 
-	 	▪ class Battleship extends Ship
-			● Describes a ship of length 4
-	 	▪ class Cruiser extends Ship
-			● Describes a ship of length 3
-		▪ class Destroyer extends Ship
-			● Describes a ship of length 2
-		▪ class Submarine extends Ship
-			● Describes a ship of length 1
-		▪ class EmptySea extends Ship
-			● Describes a part of the ocean that doesn’t have a ship in it. (It
-			seems silly to have the lack of a ship be a type of ship, but this is a
-			trick that simplifies a lot of things. This way, every location in the
-			ocean contains a “ship” of some kind.)
-	 */
-	
-	
-	
+
 	// instance variables
-	
-	
 
 	// The row that contains the bow (front part of the ship)
 	private int bowRow;
@@ -46,7 +27,6 @@ public abstract class Ship {
 	// or not
 	private boolean[] hit;
 
-	
 	// constructor
 	public Ship(int length) {
 		this.length = length;
@@ -76,7 +56,7 @@ public abstract class Ship {
 	}
 
 	// setters
-	
+
 	public void setBowRow(int bowRow) {
 		this.bowRow = bowRow;
 	}
@@ -92,134 +72,129 @@ public abstract class Ship {
 	// abstract method
 
 	// Returns the type of ship as a String.
+	/**
+	 * Definition of abstract.
+	 * 
+	 * @return
+	 */
 	public abstract String getShipType();
 
 	// other methods
 
-	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {	
+	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 		/*
-		 *	logic depends if horizontal
-		 *	check if ship is within the 10x10 array
-		 *
-		 *	check surroundings, surrounding cell should not be occupied.  occupied return false
-		 *		can be out of bounds, means on the edge.  logic above says ship fits on board
-		 *	for horizontal, need to check row above and below, and column bow +1, end -1
-		 *	e.g bow 5,5 battleship (length 4) would check row from for 4 to 6,  columns, 6 to 1 
-		 *	for not horizontal, need to check column left and right of column, and row bow +1 end  -1
-		 *	e.g bow 5,5 cruiser (length 3), would check column 4 to 6, and row 6 to 2
-		 *
-		 *	return true if never return false early
-		 */
-		
-		/*
-		Check if the ship's position is within the grid bounds. If not, return false.
-		
-		Check if the ship overlaps or touches another ship (vertically, horizontally, or diagonally). If it does, return false.
-		
-		If the ship's position is within bounds and doesn't overlap or touch another ship, return true.
+		 * Check if the ship's position is within the grid bounds. If not, return false.
+		 * Check if the ship overlaps or touches another ship (vertically, horizontally,
+		 * or diagonally). If it does, return false. If the ship's position is within
+		 * bounds and doesn't overlap or touch another ship, return true.
 		 * 
 		 */
-		
-		// Is ship within the 0-9 ocean array? 
+
+		// Is ship within the 0-9 ocean array?
 		if (horizontal) {
-		    if (column - this.getLength()  < -1 || column > 9 || row < 0 || row > 9 ) { // subs might be placed to close to edge and go out. Same with boats smaller than battle ship. 
-		        // return false if out of bounds
-		        return false;
-		    }
+			if (column - this.getLength() < -1 || column > 9 || row < 0 || row > 9) { // subs might be placed to close
+																						// to edge and go out. Same with
+																						// boats smaller than battle
+																						// ship.
+				// return false if out of bounds
+				return false;
+			}
 		} else {
-		    if (row - this.getLength() < -1 || row > 9 || column < 0 || column > 9 ) {
-		        return false; 
-		    }
+			if (row - this.getLength() < -1 || row > 9 || column < 0 || column > 9) {
+				return false;
+			}
 		}
 		// i & j represent horizontal and vertical offsets, ranging from -1 to 1
-	    if (horizontal) {
-	    	//column prior to row to cover edges of negative space
-	    	for (int j = column - this.getLength(); j <= column + 1; j++) {
-	    		for (int i = row - 1; i <= row + 1; i++) {
-	                // Check if the current position is within the ocean bounds
-	    			if (i >= 0 && i < 10 && j >= 0 && j < 10) {
-	                    // If there is already a ship at this position, return false
-	                    if (ocean.isOccupied(i, j)) {
-	                        return false;
-	                    }
-	                }
-	            }
-	        }
-	    } else {
-	    	//Rows prior to columns to cover edges of negative space
-	        for (int i = row - this.getLength(); i <= row + 1; i++) {
-	            for (int j = column - 1; j <= column + 1; j++) {
-	                // Check if the current position is within the ocean bounds
-	    			if (i >= 0 && i < 10 && j >= 0 && j < 10) {
-	                    // If there is already a ship at this position, return false
-	                    if (ocean.isOccupied(i, j)) {
-	                        return false;
-	                    }
-	                }
-	            }
-	        }
-	    }
+		if (horizontal) {
+			// column prior to row to cover edges of negative space
+			for (int j = column - this.getLength(); j <= column + 1; j++) {
+				for (int i = row - 1; i <= row + 1; i++) {
+					// Check if the current position is within the ocean bounds
+					if (i >= 0 && i < 10 && j >= 0 && j < 10) {
+						// If there is already a ship at this position, return false
+						if (ocean.isOccupied(i, j)) {
+							return false;
+						}
+					}
+				}
+			}
+		} else {
+			// Rows prior to columns to cover edges of negative space
+			for (int i = row - this.getLength(); i <= row + 1; i++) {
+				for (int j = column - 1; j <= column + 1; j++) {
+					// Check if the current position is within the ocean bounds
+					if (i >= 0 && i < 10 && j >= 0 && j < 10) {
+						// If there is already a ship at this position, return false
+						if (ocean.isOccupied(i, j)) {
+							return false;
+						}
+					}
+				}
+			}
+		}
 
-	    // If the code reaches this point, it means the ship can be placed at the given position
-	    return true;
+		// If the code reaches this point, it means the ship can be placed at the given
+		// position
+		return true;
 	}
 
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 		// TODO
 		/*
-		 * assume okToPlaceShipAt is true, will not do checks
-		 * setBowRow, setBowColumn, setHorizontal
-		 * 	get ocean ship array and start at [row][column] and equal it to this ship
-		 * 	this is the bow
-		 * if horizontal,
-		 * 	move right to left length - 1 more times, 
-		 * 	e.g. set i = 1, [row][column - i--] until i < length
-		 * if not horizontal, move up length - 1 times, j = 1 until j < length - 1, [row - j--][column]
+		 * assume okToPlaceShipAt is true, will not do checks setBowRow, setBowColumn,
+		 * setHorizontal get ocean ship array and start at [row][column] and equal it to
+		 * this ship this is the bow if horizontal, move right to left length - 1 more
+		 * times, e.g. set i = 1, [row][column - i--] until i < length if not
+		 * horizontal, move up length - 1 times, j = 1 until j < length - 1, [row -
+		 * j--][column]
 		 * 
-		 * *** did this way *** maybe just place entire ship in loop, start i or j to 0, minus 0 is itself so it will set the bow
+		 * *** did this way *** maybe just place entire ship in loop, start i or j to 0,
+		 * minus 0 is itself so it will set the bow
 		 */
-		
+
 		this.setBowRow(row);
 		this.setBowColumn(column);
 		this.setHorizontal(horizontal);
-		// the incremental variable starts at 0, so first time it is ran, it subtracts 0 from row or column
+		// the incremental variable starts at 0, so first time it is ran, it subtracts 0
+		// from row or column
 		// so that sets the bow
-        if (horizontal) {
-        	// row is constant, the column gets decremented
-            for (int i = 0; i < this.getLength(); i++) {
-                ocean.getShipArray()[row][column - i] = this;
-            }
-        } else {
-        	// the column is constant, the row gets decremented
-            for (int j = 0; j < this.getLength(); j++) {
-                ocean.getShipArray()[row - j][column] = this;
-            }
-        }
+		if (horizontal) {
+			// row is constant, the column gets decremented
+			for (int i = 0; i < this.getLength(); i++) {
+				ocean.getShipArray()[row][column - i] = this;
+			}
+		} else {
+			// the column is constant, the row gets decremented
+			for (int j = 0; j < this.getLength(); j++) {
+				ocean.getShipArray()[row - j][column] = this;
+			}
+		}
 	}
 
 	boolean shootAt(int row, int column) {
-	    // If the ship has been sunk, return false
-	    if (isSunk()) {
-	        return false;
-	    }
+		// If the ship has been sunk, return false
+		if (isSunk()) {
+			return false;
+		}
 
-	    // Does the ship occupy the given location (row, column)
-	    if (horizontal) {
-	        if (row == this.getBowRow() && column <= this.getBowColumn() && column > this.getBowColumn() - this.getLength()) {
-	            // Calculate the index of the hit section and update the hit array
-	            int hitIndex = bowColumn - column;
-	            hit[hitIndex] = true;
-	            return true;
-	        }
-	    } else {
-	        if (column == this.getBowColumn() && row <= this.getBowRow() && row > this.getBowRow() - this.getLength()) {
-	            // Calculate the index of the hit section and update the hit array
-	            int hitIndex = bowRow - row;
-	            hit[hitIndex] = true;
-	            return true;
-	        }
-	    }
-	    return false;
+		// Does the ship occupy the given location (row, column)
+		if (horizontal) {
+			if (row == this.getBowRow() && column <= this.getBowColumn()
+					&& column > this.getBowColumn() - this.getLength()) {
+				// Calculate the index of the hit section and update the hit array
+				int hitIndex = bowColumn - column;
+				hit[hitIndex] = true;
+				return true;
+			}
+		} else {
+			if (column == this.getBowColumn() && row <= this.getBowRow() && row > this.getBowRow() - this.getLength()) {
+				// Calculate the index of the hit section and update the hit array
+				int hitIndex = bowRow - row;
+				hit[hitIndex] = true;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	boolean isSunk() {
