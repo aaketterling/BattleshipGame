@@ -28,35 +28,60 @@ public abstract class Ship {
 	private boolean[] hit;
 
 	// constructor
+	/**
+	 *  Ship(int length): Initializes a new ship with the given length and an empty hit array.
+	 * @param length
+	 */
 	public Ship(int length) {
 		this.length = length;
 		// initialize hit array based on length
 		this.hit = new boolean[length];
 	}
 
+
 	// getters
+	/**
+	 *  *  - bowRow: The row containing the bow (front) of the ship
+	 * @param bowRow
+	 */
 	public int getBowRow() {
 		return bowRow;
 	}
 
+	/**
+	 * - bowColumn: The column containing the bow (front) of the ship
+	 * @return
+	 */
 	public int getBowColumn() {
 		return bowColumn;
 	}
-
+	
+	/**
+	 * - horizontal: A boolean indicating whether the ship is placed horizontally or vertically
+	 * @return
+	 */
 	public boolean isHorizontal() {
 		return horizontal;
 	}
 
+	
 	public int getLength() {
 		return length;
 	}
 
+	/**
+	 * - hit: An array of booleans indicating whether each part of the ship has been hit or not
+	 * @return
+	 */
 	public boolean[] getHit() {
 		return hit;
 	}
 
 	// setters
-
+	/**
+	 *  *  - bowRow: The row containing the bow (front) of the ship
+	 * @param bowRow
+	 */
 	public void setBowRow(int bowRow) {
 		this.bowRow = bowRow;
 	}
@@ -73,14 +98,24 @@ public abstract class Ship {
 
 	// Returns the type of ship as a String.
 	/**
-	 * Definition of abstract.
-	 * 
+	 *  * Abstract methods:
+	 *  - String getShipType(): Returns the type of the ship as a String.
 	 * @return
 	 */
 	public abstract String getShipType();
 
 	// other methods
 
+		/**
+		 *  - boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean): 
+		 * Returns true if it is possible to place the ship at the given position on the ocean grid, 
+		 * without overlapping or touching another ship.
+		 * @param row
+		 * @param column
+		 * @param horizontal
+		 * @param ocean
+		 * @return
+		 */
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 		/*
 		 * Check if the ship's position is within the grid bounds. If not, return false.
@@ -138,9 +173,9 @@ public abstract class Ship {
 		return true;
 	}
 
-	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-		// TODO
-		/*
+		/**
+		 * void placeShipAt(int row, int column, boolean horizontal, Ocean ocean): 
+		 * Places the ship at the given position on the ocean grid.
 		 * assume okToPlaceShipAt is true, will not do checks setBowRow, setBowColumn,
 		 * setHorizontal get ocean ship array and start at [row][column] and equal it to
 		 * this ship this is the bow if horizontal, move right to left length - 1 more
@@ -150,7 +185,13 @@ public abstract class Ship {
 		 * 
 		 * *** did this way *** maybe just place entire ship in loop, start i or j to 0,
 		 * minus 0 is itself so it will set the bow
+		 * @param row
+		 * @param column
+		 * @param horizontal
+		 * @param ocean
 		 */
+	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+		// TODO
 
 		this.setBowRow(row);
 		this.setBowColumn(column);
@@ -171,6 +212,13 @@ public abstract class Ship {
 		}
 	}
 
+	/**
+	 * boolean shootAt(int row, int column): Returns true if the ship occupies the given location on the grid, 
+	 * updates the hit array to indicate a hit at the given location, and returns false otherwise.
+	 * @param row
+	 * @param column
+	 * @return
+	 */
 	boolean shootAt(int row, int column) {
 		// If the ship has been sunk, return false
 		if (isSunk()) {
@@ -197,6 +245,11 @@ public abstract class Ship {
 		return false;
 	}
 
+	/**
+	* boolean isSunk(): Returns true if every part of the ship has been hit (i.e. the ship is sunk), 
+	* and false otherwise.
+	* @return
+	*/
 	boolean isSunk() {
 		// Return true if every part of the ship has been hit, false otherwise
 		// using getter method because it is available.
@@ -213,7 +266,10 @@ public abstract class Ship {
 		// parts are true, hit.
 		return true;
 	}
-
+	/**
+	 *String toString(): Returns a string representation of the ship. Returns "s" if the ship has been sunk 
+	 * and "x" if it has not been sunk.
+	 */
 	@Override
 	public String toString() {
 		// return ”s” if the ship has been sunk and ”x” if it has not been sunk
