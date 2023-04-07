@@ -2,14 +2,13 @@ package battleship;
 
 import java.util.Scanner;
 
+/**
+ * BattleshipGame is a class to play a simple version of the game Battleship We
+ * will be doing just a one-player vs. computer version, where the computer
+ * places the ships, and the human attempts to sink them.
+ */
+
 public class BattleshipGame {
-
-	/*
-	 * print ocean print ocean with ships show shots fired ask for row, column parse
-	 * string convert to number array shoot at until game is over print congrats
-	 * print number of shots taken print number of hits made
-	 */
-
 	// helper to get user input
 	/**
 	 * Helper method to get player input for row and column for shootAt method
@@ -114,10 +113,10 @@ public class BattleshipGame {
 			// take shot
 			if (ocean.shootAt(userInput[0], userInput[1])) {
 				// display message if the shot hit a ship or sunk it
-				
+
 				// get ship
 				Ship ship = ocean.getShipArray()[userInput[0]][userInput[1]];
-				
+
 				if (ship.isSunk()) {
 					System.out.println("You sunk a ship (" + ship.getShipType() + ")!");
 
@@ -128,10 +127,10 @@ public class BattleshipGame {
 				// display message if the missed and did not hit a ship
 				System.out.println("You missed, try again.");
 			}
-			
+
 			// create blank line
 			System.out.println();
-			
+
 			// check if you the last ship after you made a shot
 			isGameOver = ocean.isGameOver();
 		}
