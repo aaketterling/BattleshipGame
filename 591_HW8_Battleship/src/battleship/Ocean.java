@@ -157,6 +157,7 @@ public class Ocean {
 	}
 
 	/**
+	 * Returns true if the given location contains a ship, false if it does not
 	 * 
 	 * @param row    int of the row index in the ships array to check if occupied
 	 * @param column int of column index in ships array to check if occupied
@@ -169,6 +170,9 @@ public class Ocean {
 	}
 
 	/**
+	 * Returns true if the given location contains a ”real” ship, still afloat, (not
+	 * an EmptySea), false if it does not. In addition, this method updates the
+	 * number of shots that have been fired, and the number of hits.
 	 * 
 	 * @param row    int of the row index in the ships array to shoot at
 	 * @param column int of column index in ships array to shoot at
