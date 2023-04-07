@@ -239,7 +239,21 @@ class OceanTest {
 		assertEquals(1, ocean.getHitCount());
 		
 		//TODO
-		//More tests
+	    // Test 2: Fire another shot at the same spot
+	    assertTrue(ocean.shootAt(1, 5));
+	    assertFalse(destroyer.isSunk());
+	    assertEquals(2, ocean.getHitCount()); // hitCount should increase
+	    
+	    Destroyer destroyer2 = new Destroyer();
+	    int row2 = 3;
+	    int column2 = 6;
+	    boolean horizontal2 = true;
+	    destroyer2.placeShipAt(row2, column2, horizontal2, ocean);
+	    
+	    // Fire a shot at the second ship
+	    assertTrue(ocean.shootAt(3, 6));
+	    assertFalse(destroyer2.isSunk());
+	    assertEquals(3, ocean.getHitCount()); // hitCount should increase
 	}
 	
 	@Test

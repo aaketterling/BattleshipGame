@@ -226,7 +226,7 @@ public abstract class Ship {
 		}
 
 		// Does the ship occupy the given location (row, column)
-		if (horizontal) {
+		if (this.isHorizontal()) {
 			if (row == this.getBowRow() && column <= this.getBowColumn()
 					&& column > this.getBowColumn() - this.getLength()) {
 				// Calculate the index of the hit section and update the hit array
