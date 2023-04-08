@@ -41,7 +41,9 @@ public class Ocean {
 	// methods
 
 	/**
-	 * Helper method to emulate Python randInt with min and max
+	 * Helper method to emulate Python randInt with min and max private method
+	 * because it is used only inside the class and not to be used by instances of
+	 * this class
 	 * 
 	 * @param min minimum integer to select randomly (inclusive)
 	 * @param max maximum integer to select randomly (exclusive)
@@ -55,7 +57,8 @@ public class Ocean {
 
 	/**
 	 * Adds a certain type of ship a number of times in legal positions in the
-	 * ocean.
+	 * ocean. private method because it is used only inside the class and not to be
+	 * used by instances of this class
 	 * 
 	 * @param num      number of ships you want to add to the ocean if ok
 	 * @param shipType type of ship you want to add

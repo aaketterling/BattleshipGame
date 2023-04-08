@@ -9,7 +9,7 @@ class ShipTest {
 
 	Ocean ocean;
 	Ship ship;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		ocean = new Ocean();
@@ -19,13 +19,13 @@ class ShipTest {
 	void testGetLength() {
 		ship = new Battleship();
 		assertEquals(4, ship.getLength());
-		
-		//TODO
-		//Test 2: test Cruiser getLength of different ship
+
+		// TODO
+		// Test 2: test Cruiser getLength of different ship
 		ship = new Cruiser();
 		assertEquals(3, ship.getLength());
-		
-		//Test 3: test Submarine getLength of smallest ship
+
+		// Test 3: test Submarine getLength of smallest ship
 		ship = new Submarine();
 		assertEquals(1, ship.getLength());
 	}
@@ -38,17 +38,17 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, battleship.getBowRow());
-		
-		//TODO
-		// Test 2: for Cruiser Placing different ship near boarder 
+
+		// TODO
+		// Test 2: for Cruiser Placing different ship near boarder
 		Ship cruiser = new Cruiser();
 		row = 3;
 		column = 2;
 		horizontal = false;
 		cruiser.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, cruiser.getBowRow());
-		
-		// Test 3: for Destroyer placement in middle of board. 
+
+		// Test 3: for Destroyer placement in middle of board.
 		Ship destroyer = new Destroyer();
 		row = 5;
 		column = 7;
@@ -65,9 +65,9 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		battleship.setBowColumn(column);
-		assertEquals(column, battleship.getBowColumn());	
-		
-		//TODO
+		assertEquals(column, battleship.getBowColumn());
+
+		// TODO
 		// Test 2: for Cruiser Placing different ship near boarder
 		Ship cruiser = new Cruiser();
 		row = 3;
@@ -75,8 +75,9 @@ class ShipTest {
 		horizontal = false;
 		cruiser.placeShipAt(row, column, horizontal, ocean);
 		cruiser.setBowColumn(column);
-		assertEquals(column, cruiser.getBowColumn());;
-		
+		assertEquals(column, cruiser.getBowColumn());
+		;
+
 		// Test 3: for Destroyer placement in middle of board.
 		Ship destroyer = new Destroyer();
 		row = 5;
@@ -85,8 +86,7 @@ class ShipTest {
 		destroyer.placeShipAt(row, column, horizontal, ocean);
 		destroyer.setBowColumn(column);
 		assertEquals(column, destroyer.getBowColumn());
-		
-		
+
 	}
 
 	@Test
@@ -96,9 +96,9 @@ class ShipTest {
 		assertArrayEquals(hits, ship.getHit());
 		assertFalse(ship.getHit()[0]);
 		assertFalse(ship.getHit()[1]);
-		
-		//TODO
-		// Test 2: for Cruiser 
+
+		// TODO
+		// Test 2: for Cruiser
 		Ship cruiser = new Cruiser();
 		boolean[] hitsCruiser = new boolean[3];
 		assertArrayEquals(hitsCruiser, cruiser.getHit());
@@ -112,22 +112,22 @@ class ShipTest {
 		assertFalse(destroyer.getHit()[0]);
 		assertFalse(destroyer.getHit()[1]);
 	}
-	
+
 	@Test
 	void testGetShipType() {
 		ship = new Battleship();
 		assertEquals("battleship", ship.getShipType());
-		
-		//TODO
-		//Test 2: Cruiser with lower case
+
+		// TODO
+		// Test 2: Cruiser with lower case
 		ship = new Cruiser();
 		assertEquals("cruiser", ship.getShipType());
-		
-		//Test 3: Different ship Destroyer with lower case
+
+		// Test 3: Different ship Destroyer with lower case
 		ship = new Destroyer();
 		assertEquals("destroyer", ship.getShipType());
 	}
-	
+
 	@Test
 	void testIsHorizontal() {
 		Ship battleship = new Battleship();
@@ -136,48 +136,46 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		assertTrue(battleship.isHorizontal());
-		
-		//TODO
-		//Test 2: Cruiser if it is horizontal
+
+		// TODO
+		// Test 2: Cruiser if it is horizontal
 		Ship cruiser = new Cruiser();
 		int row1 = 0;
 		int column1 = 4;
 		boolean horizontal1 = true;
 		cruiser.placeShipAt(row1, column1, horizontal1, ocean);
 		assertTrue(cruiser.isHorizontal());
-		
-		
-		//Test 3: Destroyer if it is horizontal
+
+		// Test 3: Destroyer if it is horizontal
 		Ship destroyer = new Destroyer();
 		int row12 = 0;
 		int column12 = 4;
 		boolean horizontal12 = true;
 		destroyer.placeShipAt(row12, column12, horizontal12, ocean);
 		assertTrue(destroyer.isHorizontal());
-		
+
 	}
-	
+
 	@Test
 	void testSetBowRow() {
 		Ship battleship = new Battleship();
 		int rowrow = 0;
 		battleship.setBowRow(rowrow);
 		assertEquals(rowrow, battleship.getBowRow());
-		
-		//TODO
-		//Test 2: Cruiser does this ship work with setBowRow
+
+		// TODO
+		// Test 2: Cruiser does this ship work with setBowRow
 		Ship cruiser = new Cruiser();
 		int rownew = 0;
 		cruiser.setBowRow(rownew);
 		assertEquals(rownew, cruiser.getBowRow());
-		
-		//Test 3: Destroyer does this ship work with setBowRow
+
+		// Test 3: Destroyer does this ship work with setBowRow
 		Ship destroyer = new Destroyer();
 		int row0 = 0;
 		destroyer.setBowRow(row0);
 		assertEquals(row0, destroyer.getBowRow());
-		
-		
+
 	}
 
 	@Test
@@ -186,15 +184,15 @@ class ShipTest {
 		int column = 4;
 		battleship.setBowColumn(column);
 		assertEquals(column, battleship.getBowColumn());
-		
-		//TODO
-		//Test 2: Cruiser does this ship work with setBowColumn
+
+		// TODO
+		// Test 2: Cruiser does this ship work with setBowColumn
 		Ship cruiser = new Cruiser();
 		int column1 = 4;
 		cruiser.setBowColumn(column1);
 		assertEquals(column1, cruiser.getBowColumn());
-		
-		//Test 3: Destroyer does this ship work with setBowColumn
+
+		// Test 3: Destroyer does this ship work with setBowColumn
 		Ship destroyer1 = new Destroyer();
 		int column2 = 4;
 		destroyer1.setBowColumn(column2);
@@ -207,35 +205,35 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.setHorizontal(horizontal);
 		assertTrue(battleship.isHorizontal());
-		
-		//TODO
-		//Test 2: Cruiser does this ship work with SetHorizontal 
+
+		// TODO
+		// Test 2: Cruiser does this ship work with SetHorizontal
 		Ship cruiser = new Cruiser();
 		boolean horizontal1 = true;
 		cruiser.setHorizontal(horizontal1);
 		assertTrue(cruiser.isHorizontal());
-		
-		//Test 3: Destroyer does this ship work with SetHorizontal 
+
+		// Test 3: Destroyer does this ship work with SetHorizontal
 		Ship destroyer1 = new Destroyer();
 		boolean horizontal2 = true;
 		destroyer1.setHorizontal(horizontal2);
 		assertTrue(destroyer1.isHorizontal());
-		
+
 	}
 
 	@Test
 	void testOkToPlaceShipAt() {
-		
-		//test when other ships are not in the ocean
+
+		// test when other ships are not in the ocean
 		Ship battleShip = new Battleship();
-        Ocean battleShipOcean = new Ocean();
-		battleShip.placeShipAt(0, 4, true, battleShipOcean); //horizontal
+		Ocean battleShipOcean = new Ocean();
+		battleShip.placeShipAt(0, 4, true, battleShipOcean); // horizontal
 		int row = 0;
 		int column = 4;
 		boolean horizontal = true;
 		boolean ok = battleShip.okToPlaceShipAt(row, column, horizontal, battleShipOcean);
 		assertFalse(ok, "OK to place ship here.");
-		
+
 		// Test 2: when placing a ship would cause an overlap with another ship
 		Ship cruiser = new Cruiser();
 		int row1 = 0;
@@ -252,13 +250,13 @@ class ShipTest {
 		ok = destroyer.okToPlaceShipAt(row, column, horizontal, battleShipOcean);
 		assertFalse(ok, "Not OK to place ship here, would touch another ship diagonally.");
 	}
-	
+
 	@Test
 	void testOkToPlaceShipAtAgainstOtherShipsOneBattleship() {
-		
-		//test when other ships are in the ocean
-		
-		//place first ship
+
+		// test when other ships are in the ocean
+
+		// place first ship
 		Battleship battleship1 = new Battleship();
 		int row = 0;
 		int column = 4;
@@ -267,17 +265,17 @@ class ShipTest {
 		assertTrue(ok1, "OK to place ship here.");
 		battleship1.placeShipAt(row, column, horizontal, ocean);
 
-		//test second ship
+		// test second ship
 		Battleship battleship2 = new Battleship();
 		row = 1;
 		column = 4;
 		horizontal = true;
 		boolean ok2 = battleship2.okToPlaceShipAt(row, column, horizontal, ocean);
 		assertFalse(ok2, "Not OK to place ship vertically adjacent below.");
-		
-		//TODO
-		//Test 2: 
-		//place another ship which will go out of bounds. 
+
+		// TODO
+		// Test 2:
+		// place another ship which will go out of bounds.
 		Battleship battleship3 = new Battleship();
 		row = 1;
 		column = 1;
@@ -285,26 +283,28 @@ class ShipTest {
 		boolean ok3 = battleship3.okToPlaceShipAt(row, column, horizontal, ocean);
 		assertFalse(ok3, "Not OK to place ship it will go out of bounds.");
 
-		//test 3: ship will be diagonally too close too other ship. This test affirms diagonal checks are working 
+		// test 3: ship will be diagonally too close too other ship. This test affirms
+		// diagonal checks are working
 		Battleship battleship4 = new Battleship();
 		row = 1;
 		column = 8;
 		horizontal = true;
-		boolean ok5 = battleship4.okToPlaceShipAt(row, column, horizontal,  ocean);
-		assertFalse(ok5, "Not OK ship will be diagonally too close too other ship. This test affirms diagonal checks are working .");
-		
-		//test 4: place in an okay spot to make pass
+		boolean ok5 = battleship4.okToPlaceShipAt(row, column, horizontal, ocean);
+		assertFalse(ok5,
+				"Not OK ship will be diagonally too close too other ship. This test affirms diagonal checks are working .");
+
+		// test 4: place in an okay spot to make pass
 		Battleship battleship5 = new Battleship();
 		row = 5;
 		column = 8;
 		horizontal = true;
-		boolean ok6 = battleship5.okToPlaceShipAt(row, column, horizontal,  ocean);
+		boolean ok6 = battleship5.okToPlaceShipAt(row, column, horizontal, ocean);
 		assertTrue(ok6, "Good place to put ship.");
 	}
 
 	@Test
 	void testPlaceShipAt() {
-		
+
 		Ship battleship = new Battleship();
 		int row = 0;
 		int column = 4;
@@ -313,78 +313,77 @@ class ShipTest {
 		assertEquals(row, battleship.getBowRow());
 		assertEquals(column, battleship.getBowColumn());
 		assertTrue(battleship.isHorizontal());
-		
+
 		assertEquals("empty", ocean.getShipArray()[0][0].getShipType());
 		assertEquals(battleship, ocean.getShipArray()[0][1]);
-		
 
-		//TODO
-	    // Test 2: vertical placement
-	    Ship cruiser = new Cruiser();
-	    row = 3;
-	    column = 0;
-	    horizontal = false;
-	    cruiser.placeShipAt(row, column, horizontal, ocean);
-	    assertEquals(row, cruiser.getBowRow());
-	    assertEquals(column, cruiser.getBowColumn());
-	    assertFalse(cruiser.isHorizontal());
-	    assertEquals(cruiser, ocean.getShipArray()[1][0]);
+		// TODO
+		// Test 2: vertical placement
+		Ship cruiser = new Cruiser();
+		row = 3;
+		column = 0;
+		horizontal = false;
+		cruiser.placeShipAt(row, column, horizontal, ocean);
+		assertEquals(row, cruiser.getBowRow());
+		assertEquals(column, cruiser.getBowColumn());
+		assertFalse(cruiser.isHorizontal());
+		assertEquals(cruiser, ocean.getShipArray()[1][0]);
 
-	    // Test 3: edge case: placing a ship at the bottom-right corner of the ocean
-	    Ship submarine = new Submarine();
-	    row = 9;
-	    column = 9;
-	    horizontal = true; // or false, since it's a 1-length ship
-	    submarine.placeShipAt(row, column, horizontal, ocean);
-	    assertEquals(row, submarine.getBowRow());
-	    assertEquals(column, submarine.getBowColumn());
-	    assertTrue(submarine.isHorizontal());
-	    assertEquals(submarine, ocean.getShipArray()[9][9]);
-	    
+		// Test 3: edge case: placing a ship at the bottom-right corner of the ocean
+		Ship submarine = new Submarine();
+		row = 9;
+		column = 9;
+		horizontal = true; // or false, since it's a 1-length ship
+		submarine.placeShipAt(row, column, horizontal, ocean);
+		assertEquals(row, submarine.getBowRow());
+		assertEquals(column, submarine.getBowColumn());
+		assertTrue(submarine.isHorizontal());
+		assertEquals(submarine, ocean.getShipArray()[9][9]);
+
 	}
 
 	@Test
 	void testShootAt() {
-		
+
 		Ship battleship = new Battleship();
 		int row = 0;
 		int column = 9;
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
-		
-		//Test when the ship is not hit
+
+		// Test when the ship is not hit
 		assertFalse(battleship.shootAt(1, 9));
-		boolean[] hitArray0 = {false, false, false, false};
+		boolean[] hitArray0 = { false, false, false, false };
 		assertArrayEquals(hitArray0, battleship.getHit());
-		
-		//TODO
+
+		// TODO
 		// Test 2: when the ship is hit
 		assertTrue(battleship.shootAt(0, 9));
-		boolean[] hitArray1 = {true, false, false, false};
+		boolean[] hitArray1 = { true, false, false, false };
 		assertArrayEquals(hitArray1, battleship.getHit());
 
 		// Test 3: when the ship is sunk
 		battleship.shootAt(0, 8);
 		battleship.shootAt(0, 7);
 		assertTrue(battleship.shootAt(0, 6));
-		boolean[] hitArray2 = {true, true, true, true};
+		boolean[] hitArray2 = { true, true, true, true };
 		assertArrayEquals(hitArray2, battleship.getHit());
 	}
-	
+
 	@Test
 	void testIsSunk() {
-		
+
 		Ship submarine = new Submarine();
 		int row = 3;
 		int column = 3;
 		boolean horizontal = true;
 		submarine.placeShipAt(row, column, horizontal, ocean);
-		
+
 		assertFalse(submarine.isSunk());
 		assertFalse(submarine.shootAt(5, 2));
 		assertFalse(submarine.isSunk());
-		
-		//TODO
+
+		// TODO
 		// Test 2: when a ship is sunk after being hit multiple times
 		Ship destroyer = new Destroyer();
 		row = 6;
@@ -408,23 +407,23 @@ class ShipTest {
 		assertFalse(cruiser.isSunk());
 		assertTrue(cruiser.shootAt(1, 3));
 		assertFalse(cruiser.isSunk());
-		
+
 	}
 
 	@Test
 	void testToString() {
-		
+
 		Ship battleship = new Battleship();
 		assertEquals("x", battleship.toString());
-		
+
 		int row = 9;
 		int column = 1;
 		boolean horizontal = false;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		battleship.shootAt(9, 1);
 		assertEquals("x", battleship.toString());
-		
-		//TODO
+
+		// TODO
 		// Test 2: when the ship has been hit only once (partially sunk)
 		Ship cruiser = new Cruiser();
 		row = 5;
