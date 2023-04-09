@@ -194,9 +194,12 @@ public class Ocean {
 
 		// is it a real ship
 		if (this.isOccupied(row, column)) {
+
 			// is it a float
 			if (!ship.isSunk()) {
 				// update number of hits
+				// If the user shoots the same part of a ship more than once, every hit is
+				// counted, even though additional “hits” don’t do the user any good.
 				this.hitCount += 1;
 				// The shootAt method in the Ocean class will call the shootAt method in the
 				// ship (or EmptySea), in this particular location
@@ -280,12 +283,6 @@ public class Ocean {
 	 */
 	void print() {
 		// TODO
-		// for each location in the 10 by 10 array (the “ocean”)
-		// if the location contains a ship that is sunk or if the location has been shot
-		// at, and was hit or nothing was found
-		// print the ship itself -- this will call toString in the Ship class or any
-		// Ship subclass which has toString defined (i.e. EmptySea)
-		// otherwise print “.”
 
 		// 10 x 10 grid
 		// print top row headers
@@ -315,7 +312,7 @@ public class Ocean {
 						// in hit array
 						// 0 bowcolumn, 1 bowcolumn - 1, ...
 						if (shipAtCell.getHit()[shipAtCell.getBowColumn() - k]) {
-							// if hit print if is is s or x
+							// if hit print if is is s or x, will call toString method of class
 							System.out.print(" " + shipAtCell);
 						} else {
 							// not yet hit
@@ -326,7 +323,7 @@ public class Ocean {
 						// hit array
 						// 0 bowRow, 1 bowRow - 1, ...
 						if (shipAtCell.getHit()[shipAtCell.getBowRow() - j]) {
-							// if hit print if is is s or x
+							// if hit print if is is s or x, will call toString method of class
 							System.out.print(" " + shipAtCell);
 						} else {
 							// not yet hit
