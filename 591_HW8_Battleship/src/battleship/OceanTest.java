@@ -1,3 +1,8 @@
+/*
+ * Adam Ketterling and Armand Aquino worked on homework together
+ * We are submitting the same code
+ */
+
 package battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
