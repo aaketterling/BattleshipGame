@@ -249,6 +249,14 @@ class ShipTest {
 		horizontal = false;
 		ok = destroyer.okToPlaceShipAt(row, column, horizontal, battleShipOcean);
 		assertFalse(ok, "Not OK to place ship here, would touch another ship diagonally.");
+
+		// test 4: place outside ocean dimensions row or column < 0 or > 9
+		Ship submarine = new Submarine();
+		assertFalse(submarine.okToPlaceShipAt(-1, 9, true, ocean));
+		assertFalse(submarine.okToPlaceShipAt(0, 10, true, ocean));
+		assertFalse(submarine.okToPlaceShipAt(-1, 10, true, ocean));
+		assertFalse(submarine.okToPlaceShipAt(10, 9, true, ocean));
+		assertFalse(submarine.okToPlaceShipAt(9, -1, true, ocean));
 	}
 
 	@Test
