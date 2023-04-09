@@ -28,7 +28,7 @@ public class BattleshipGame {
 			// ask user for row and column
 			System.out.print("Enter row,column: ");
 
-			// get input as string
+			// get input as string, trim leading and trailing whitespaces
 			String input = scanner.nextLine().trim();
 
 			// check if there is a comma
@@ -94,6 +94,7 @@ public class BattleshipGame {
 		// for getUserRowColumnInput method
 		Scanner scanner = new Scanner(System.in);
 
+		// create instance of ocean and place ships randomly for the game
 		Ocean ocean = new Ocean();
 		ocean.placeAllShipsRandomly();
 		// for while loop. it will be false when first initialized
