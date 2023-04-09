@@ -86,10 +86,18 @@ public abstract class Ship {
 		this.bowRow = bowRow;
 	}
 
+	/**
+	 *  *  - bowColumn: The column containing the bow (front) of the ship
+	 * @param bowColumn
+	 */
 	public void setBowColumn(int bowColumn) {
 		this.bowColumn = bowColumn;
 	}
-
+	
+	/**
+	 *  *  - horizontal: whether the ship is horizontal or not
+	 * @param horiztonal
+	 */
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
